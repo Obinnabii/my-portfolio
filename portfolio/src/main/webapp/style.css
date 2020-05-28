@@ -1,6 +1,10 @@
 a {
-  color: rgb(0, 170, 0);
+  color: rgb(0, 180, 0);
   text-decoration: none;
+}
+
+a:hover{
+    color: rgb(0, 230, 0);
 }
 
 #content {
