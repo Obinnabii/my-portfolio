@@ -12,17 +12,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+// TEXT
+/**Heading text */
+const heading_text = "<h1>Obi Abii's Portfolio</h1>"; 
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+/**About me blob */
+const about_me_text = ("<p>Hi, My name is Obi and this is my portfolio! <br>\
+I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020 </p>");
+
+// DIVS
+/** The name of the div where the heading will be placed */
+const heading_div = 'console_output';
+
+
+/** print text to a given_div  */
+function type(text, div_text) {
+  var got_div = document.getElementById(div_text);
+  //instantiate the typewriter
+  var typewriter = new Typewriter(got_div, {
+    loop: false,
+    delay: 0,
+    autoStart: true,
+    cursor: '*',
+    strings: []
+  });
+  //print
+  typewriter
+  .typeString(text);
 }
+
+
+/**
+ * Adds heading to the page.
+ */
+function add_heading() { 
+  //print
+  type(heading_text, heading_div);
+}
+
