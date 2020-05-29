@@ -12,42 +12,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/**Create a typewriter from a given div */
+function typify(div_id){
+  //get the div
+  var div = document.getElementById(div_id);
+  //turn into typewriter object
+  return new Typewriter(div, {
+    loop: false,
+    delay: 10,
+    autoStart: true,
+    cursor: '',
+    strings: []
+  });
+}
 
 // TEXT
 /**Heading text */
-const heading_text = "<h1>Obi Abii's Portfolio</h1>"; 
+const heading_text = "<div class = 'row'> <h1> Obi Abii's Portfolio </h1> </div>"; 
 
 /**About me blob */
-const about_me_text = ("<p>Hi, My name is Obi and this is my portfolio! <br>\
-I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020 </p>");
+const about_me_text = "<div class = 'row'> <p>Hi, My name is Obi and this is my portfolio! </p>\
+<p>I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020. My main career focus is software engineering. \
+I am partyicularly interensted in Machine learning </p></div>";
 
-// DIVS
-/** The name of the div where the heading will be placed */
-const heading_div = 'console_output';
-
-
-/** print text to a given_div  */
-function type(text, div_text) {
-  var got_div = document.getElementById(div_text);
-  //instantiate the typewriter
-  var typewriter = new Typewriter(got_div, {
-    loop: false,
-    delay: 0,
-    autoStart: true,
-    cursor: '*',
-    strings: []
-  });
-  //print
-  typewriter
-  .typeString(text);
-}
+const projects_blurb = "<div class = 'row'>"
 
 
-/**
- * Adds heading to the page.
- */
-function add_heading() { 
-  //print
-  type(heading_text, heading_div);
-}
+
+// DIV_ID
+/** The id of the div where the text will be placed */
+const console_id = 'console';
+
+// TYPEWRITERS
+/**The names of the various typewriters I will use */
+var console = typify(console_id);
+
+console
+  .typeString(heading_text)
+  .pauseFor(300)
+  .typeString(about_me_text);
 
