@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//HELPER_FUNCTION
 /**Create a typewriter from a given div */
 function typify(div_id){
   //get the div
@@ -36,7 +37,7 @@ const about_me_text = "<div class = 'row'> <p>Hi, My name is Obi and this is my 
 I am particularly interested in <span class='emphasis'>Machine learning.</span></p></div>";
 
 /**blurb containg information about the languages I know */
-const language_blurb = "<div class = 'row'> <p> I have experience with the following languages;</p></div>\
+const language_blurb = "div class = 'row'> <h2>languages</h2></div><div class = 'row'> <p> I have experience with the following languages</p></div><\
   <!-- the list of languages with icons -->\
   <div class='row row-cols-4 justify-content-center text-center emphasis align-middle'>\
     <div class='col col-2'>\
@@ -73,33 +74,38 @@ const language_blurb = "<div class = 'row'> <p> I have experience with the follo
   //   C/C++ \
   // </div>\
 
-const projects_blurb = "<div class = 'row'> <p> Below are some projects that I have worked on.</p></div>\
- <!-- row for project cards -->\
- <div class='row row-cols-4 justify-content-center text-center emphasis align-middle'>\
-  <!-- card -->\
-  <div class='card' style='width: 18rem;'>\
-    <img src='...' class='card-img-top' alt='...'>\
-    <div class='card-body'>\
-      <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>\
-    </div>\
-  </div>\
-</div>\
-"
-
+const projects_blurb = "</div><div class = 'row'> <h2>projects</h2></div><div class = 'row'> <p> Below is a selection of some of my favorite projects.</p>"
 
 
 // DIV_ID
 /** The id of the div where the text will be placed */
 const console_id = 'console';
 
+/** List of project_ids */
+var projects = ['project_1']
+
 // TYPEWRITERS
 /**The names of the various typewriters I will use */
 var console = typify(console_id);
+
+// FUNCTIONS
+/**Make projects visible */
+function addProject(div_id){
+  document.getElementById(div_id).style.visibility = "visible";
+}
+
+
+
+/**print the initial text blurbs */
 
 console
   .typeString(heading_text)
   .pauseFor(300)
   .typeString(about_me_text)
   .pauseFor(300)
-  .typeString(language_blurb);
+  .typeString(language_blurb)
+  .pauseFor(300)
+  .typeString(projects_blurb)
+  .pauseFor(300)
+  .callFunction(() => addProject(projects[0]));
 
