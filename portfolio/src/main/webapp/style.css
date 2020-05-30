@@ -27,6 +27,14 @@ body{
 
 .project_wrapper {
   visibility: hidden;
+  padding: 1% 2%;
+  margin: 1%;
+  background-color: rgb(10, 10, 10)
+ }
+
+.project_wrapper:hover{
+  border-color: gray;
+  background-color: rgb(31, 30, 30)
  }
 
 .emphasis {
@@ -38,9 +46,17 @@ nav {
   padding-bottom: 3vh;
  }
 
+.project_img_wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .project_img {
   width: 100%;
-  height: auto;
+  display: block;
+  margin: auto;
+  align-self: center;
 
  }
 
