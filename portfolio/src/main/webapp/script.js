@@ -108,6 +108,6 @@ console
   .typeString(projects_blurb) //print project header
   .pauseFor(300)
   .callFunction(() => addProject(projects[0])); //show first project
-  // .pauseFor(300)
-  // .callFunction(() => addProject(projects[1])); // show second project
+  .pauseFor(300)
+  .callFunction(() => addProject(projects[1])); // show second project
 
