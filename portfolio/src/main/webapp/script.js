@@ -82,7 +82,7 @@ const projects_blurb = "<div class = 'row'> <h2>projects</h2></div><div class = 
 const console_id = 'console';
 
 /** List of project_ids */
-var projects = ['project_0', 'project_1']
+var projects = ['project_0', 'project_1', 'project_2']
 
 // TYPEWRITERS
 /**The names of the various typewriters I will use */
@@ -107,7 +107,9 @@ console
   .pauseFor(300)
   .typeString(projects_blurb) //print project header
   .pauseFor(300)
-  .callFunction(() => addProject(projects[0])); //show first project
+  .callFunction(() => addProject(projects[0])) //show first project
   .pauseFor(300)
-  .callFunction(() => addProject(projects[1])); // show second project
+  .callFunction(() => addProject(projects[1])) // show second project
+  .pauseFor(300)
+  .callFunction(() => addProject(projects[2])); // show third project
 
