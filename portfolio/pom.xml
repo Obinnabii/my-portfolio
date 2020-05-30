@@ -35,7 +35,7 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
-          <deploy.projectId>obi_portfolio</deploy.projectId>
+          <deploy.projectId>ObiAbii</deploy.projectId>
           <deploy.version>1</deploy.version>
         </configuration>
       </plugin>
