@@ -37,7 +37,7 @@ const about_me_text = "<div class = 'row'> <p>Hi, My name is Obi and this is my 
 I am particularly interested in <span class='emphasis'>Machine learning.</span></p></div>";
 
 /**blurb containg information about the languages I know */
-const language_blurb = "div class = 'row'> <h2>languages</h2></div><div class = 'row'> <p> I have experience with the following languages</p></div><\
+const language_blurb = "<div class = 'row'> <h2>languages</h2></div><div class = 'row'> <p> I have experience with the following languages</p></div>\
   <!-- the list of languages with icons -->\
   <div class='row row-cols-4 justify-content-center text-center emphasis align-middle'>\
     <div class='col col-2'>\
@@ -74,7 +74,7 @@ const language_blurb = "div class = 'row'> <h2>languages</h2></div><div class = 
   //   C/C++ \
   // </div>\
 
-const projects_blurb = "</div><div class = 'row'> <h2>projects</h2></div><div class = 'row'> <p> Below is a selection of some of my favorite projects.</p>"
+const projects_blurb = "<div class = 'row'> <h2>projects</h2></div><div class = 'row'> <p> Below is a selection of some of my favorite projects.</p></div>"
 
 
 // DIV_ID
@@ -82,7 +82,7 @@ const projects_blurb = "</div><div class = 'row'> <h2>projects</h2></div><div cl
 const console_id = 'console';
 
 /** List of project_ids */
-var projects = ['project_1']
+var projects = ['project_0', 'project_1']
 
 // TYPEWRITERS
 /**The names of the various typewriters I will use */
@@ -99,13 +99,15 @@ function addProject(div_id){
 /**print the initial text blurbs */
 
 console
-  .typeString(heading_text)
+  .typeString(heading_text) //print heading
   .pauseFor(300)
-  .typeString(about_me_text)
+  .typeString(about_me_text) //print about_me section
   .pauseFor(300)
-  .typeString(language_blurb)
+  .typeString(language_blurb) //print language_section
   .pauseFor(300)
-  .typeString(projects_blurb)
+  .typeString(projects_blurb) //print project header
   .pauseFor(300)
-  .callFunction(() => addProject(projects[0]));
+  .callFunction(() => addProject(projects[0])); //show first project
+  // .pauseFor(300)
+  // .callFunction(() => addProject(projects[1])); // show second project
 
