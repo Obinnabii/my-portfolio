@@ -19,13 +19,19 @@ body{
   align-content: center;
  }
 
-nav {
-  padding-top: 3vh;
-  padding-bottom: 3vh;
- }
-
 #content {
   margin-left: auto;
   margin-right: auto;
   width:700px;
  }
+
+.emphasis {
+  color: rgb(0, 170, 0)
+}
+
+nav {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+ }
+
+
