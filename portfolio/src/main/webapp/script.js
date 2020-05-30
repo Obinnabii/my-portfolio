@@ -30,12 +30,61 @@ function typify(div_id){
 /**Heading text */
 const heading_text = "<div class = 'row'> <h1> Obi Abii's Portfolio </h1> </div>"; 
 
-/**About me blob */
-const about_me_text = "<div class = 'row'> <p>Hi, My name is Obi and this is my portfolio! </p>\
-<p>I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020. My main career focus is software engineering. \
-I am partyicularly interensted in Machine learning </p></div>";
+/**About me blurb */
+const about_me_text = "<div class = 'row'> <p>Hi, My name is Obi and this is my <span class='emphasis'>portfolio! <br></span></p>\
+<p>I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020. My main career focus is <span class='emphasis'>software engineering</span>. \
+I am particularly interested in <span class='emphasis'>Machine learning.</span></p></div>";
 
-const projects_blurb = "<div class = 'row'>"
+/**blurb containg information about the languages I know */
+const language_blurb = "<div class = 'row'> <p> I have experience with the following languages;</p></div>\
+  <!-- the list of languages with icons -->\
+  <div class='row row-cols-4 justify-content-center text-center emphasis align-middle'>\
+    <div class='col col-2'>\
+      <div class='col'><span class='iconify' data-icon='simple-icons:ocaml' data-inline='false'></span></div>\
+      <div class='col col-lg-2'> Ocaml</div>\
+    </div>\
+    <div class='col col-2 '>\
+      <div class='col'><i class='fab fa-html5'></i></div>\
+      <div class='col'> HTML</div>\
+    </div>\
+    <div class='col col-2 '>\
+      <div class='col'><i class='fab fa-css3'></i></div>\
+      <div class='col'>CSS</div>\
+    </div>\
+    <div class='col col-3 '>\
+      <div class='col'><i class='fab fa-js-square'></i></div> \
+      <div class='col'>JavaScript</div>\
+    </div>\
+    <div class='col col-2 '>\
+      <div class='col'><i class='fab fa-node-js'></i></div>\
+      <div class='col'> NodeJS</div>\
+    </div>\
+    <div class='col col-2 '> \
+      <div class='col'><i class='fab fa-java'></i></div>\
+      <div class='col'> Java</div>\
+    </div>\
+    <div class='col col-2 '> \
+      <div class='col'><i class='fab fa-python'></i></div>\
+      <div class='col'> Python</div>\
+    </div>\
+  </div>"
+
+  // <div class='col col-2'> \
+  //   C/C++ \
+  // </div>\
+
+const projects_blurb = "<div class = 'row'> <p> Below are some projects that I have worked on.</p></div>\
+ <!-- row for project cards -->\
+ <div class='row row-cols-4 justify-content-center text-center emphasis align-middle'>\
+  <!-- card -->\
+  <div class='card' style='width: 18rem;'>\
+    <img src='...' class='card-img-top' alt='...'>\
+    <div class='card-body'>\
+      <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>\
+    </div>\
+  </div>\
+</div>\
+"
 
 
 
@@ -50,5 +99,7 @@ var console = typify(console_id);
 console
   .typeString(heading_text)
   .pauseFor(300)
-  .typeString(about_me_text);
+  .typeString(about_me_text)
+  .pauseFor(300)
+  .typeString(language_blurb);
 
