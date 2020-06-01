@@ -109,10 +109,6 @@ const language_blurb = `
     </div>
   </div>`
 
-  // <div class="col col-2"> \
-  //   C/C++ \
-  // </div>\
-
 /**
 * blurb containg information about the languages I know 
 * @type {String}
