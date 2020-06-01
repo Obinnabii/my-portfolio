@@ -101,11 +101,13 @@ const language_blurb = `
       <div class="col"><i class="fab fa-python"></i></div>
       <div class="col"> Python</div>
     </div>
+    <div class="col col-2"> 
+      <div class="col">
+        <span class="iconify" data-icon="cib:coreui-c" data-inline="false"></span>
+      </div>
+      <div class="col"> C/C++</div>
+    </div>
   </div>`
-
-  // <div class="col col-2"> \
-  //   C/C++ \
-  // </div>\
 
 /**
 * blurb containg information about the languages I know 
