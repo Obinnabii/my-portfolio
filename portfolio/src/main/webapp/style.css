@@ -1,3 +1,5 @@
+/* LINKS */
+
 a {
   color: rgb(0, 180, 0);
   text-decoration: none;
@@ -7,6 +9,8 @@ a:hover{
   color: rgb(0, 230, 0);
   text-decoration: none;
  }
+
+/* GENERAL */
 
 body{
   background-color: black;
@@ -25,34 +29,38 @@ body{
   width:800px;
  }
 
-.project_wrapper {
-  visibility: hidden;
-  padding: 1% 2%;
-  margin: 1%;
-  background-color: rgb(10, 10, 10)
- }
-
-.project_wrapper:hover{
-  border-color: gray;
-  background-color: rgb(31, 30, 30)
- }
-
 .emphasis {
   color: rgb(0, 170, 0)
 }
+
+/* NAV BAR */
 
 nav {
   padding-top: 3vh;
   padding-bottom: 3vh;
  }
 
-.project_img_wrapper{
+/* PROJECT SECTION */
+
+.project-wrapper {
+  visibility: hidden;
+  padding: 1% 2%;
+  margin: 1%;
+  background-color: rgb(10, 10, 10)
+ }
+
+.project-wrapper:hover{
+  border-color: gray;
+  background-color: rgb(31, 30, 30)
+ }
+
+.project-img-wrapper{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.project_img {
+.project-img {
   width: 100%;
   display: block;
   margin: auto;
@@ -60,6 +68,3 @@ nav {
 
  }
 
-.project_head {
-    vertical-align: top;
-}
