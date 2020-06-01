@@ -5,14 +5,14 @@ a {
   text-decoration: none;
  }
 
-a:hover{
+a:hover {
   color: rgb(0, 230, 0);
   text-decoration: none;
  }
 
 /* GENERAL */
 
-body{
+body {
   background-color: black;
   color: gainsboro;
   font-family:  'IBM Plex Mono', 'Fira code', 'Courier New', Courier, monospace;;
@@ -49,12 +49,12 @@ nav {
   background-color: rgb(10, 10, 10)
  }
 
-.project-wrapper:hover{
+.project-wrapper:hover {
   border-color: gray;
   background-color: rgb(31, 30, 30)
  }
 
-.project-img-wrapper{
+.project-img-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
