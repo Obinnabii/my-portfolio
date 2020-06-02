@@ -31,13 +31,13 @@ const PROJECTS = ['project_0', 'project_1', 'project_2']
 * The id of the div where comments will be placed
 * @type {String}
 */
-const COMMENTS_ID = "comments-container";
+const COMMENTS_ID = "comment-container";
 
 /** 
-* The id of the div where comments will be placed
+* The id of the list where comments will be placed
 * @type {String}
 */
-const COMMENTS_ID = "comments-container";
+const WELCOME_ID = "hello-container";
 
 
 // SERVER_FUNCTIONS
@@ -48,7 +48,7 @@ const COMMENTS_ID = "comments-container";
 async function getWelcomeMessage() {
   const response = await fetch('/data');    // send a request to data
   const hello = await response.json();      // parse response
-  document.getElementById('hello-container').innerText = hello;
+  document.getElementById(WELCOME_ID).innerText = hello;
 }
 
 /**
@@ -199,13 +199,13 @@ let myConsole = typify(CONSOLE_ID);
 
 /**print the initial text blurbs */
 myConsole
-  .typeString(HEADING_TEXT) 
+  .typeString(headingBlurb) 
   .pauseFor(300)
-  .typeString(ABOUT_ME_TEXT) 
+  .typeString(aboutMeBlurb) 
   .pauseFor(300)
-  .typeString(LANGUAGE_BLURB) 
+  .typeString(languageBlurb) 
   .pauseFor(300)
-  .typeString(PROJECTS_BLURB) 
+  .typeString(projectsBlurb) 
   .pauseFor(300)
   .callFunction(() => addProject(PROJECTS[0])) //show first project
   .pauseFor(300)
