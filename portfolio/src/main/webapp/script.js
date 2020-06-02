@@ -214,4 +214,4 @@ myConsole
   .pauseFor(300)
   .callFunction(() => addProject(PROJECTS[2])); // show third project
 
-getCommentsList();
+// getCommentsList();
