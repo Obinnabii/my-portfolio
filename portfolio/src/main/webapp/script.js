@@ -162,12 +162,12 @@ const projects = ['project_0', 'project_1', 'project_2']
 * The typewriter corresponding to the 'console_id' div
 * @type {Typewriter}
 */
-let console = typify(console_id);
+let myConsole = typify(console_id);
 
 // FUNCTION CALLS
 
 /**print the initial text blurbs */
-console
+myConsole
   .typeString(heading_text) 
   .pauseFor(300)
   .typeString(about_me_text) 
