@@ -58,9 +58,11 @@ async function getCommentsList() {
   fetch('/data')                          // look above for simple explanation
   .then(response => response.json()) 
   .then((comments) => { 
-    let clen = comments.length;             // length of list
+    let commentContainer = document.getElementById(COMMENTS_ID); 
+    let clen = comments.length;             
     for (i = 0; i < clen; i++) {            // loop through
       console.log(comments[i]);
+      addToList(comments[i], commentContainer)
     } 
   });
 }
