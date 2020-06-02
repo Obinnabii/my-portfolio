@@ -1,4 +1,4 @@
-  // Copyright 2019 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,10 +17,24 @@
  * Get a welcome message from the serverlet and put it in the welcome container.
  */
 async function getWelcomeMessage() {
-  const response = await fetch('/data');
-  const quote = await response.text();
-  document.getElementById('hello-container').innerText = quote;
+  const response = await fetch('/data');    // send a request to data
+  const hello = await response.json();      // parse response
+  document.getElementById('hello-container').innerText = hello;
 }
+
+/**
+* Get a list of comments  from the serverlet.
+*/
+async function getCommentsList() {
+    fetch('/data')                          // look above for simple explanation
+    .then(response => response.json()) 
+    .then((comments) => { 
+    console.log(comments[0]);
+    console.log(comments[1]);
+    console.log(comments[2]);
+});
+}
+
 
 // HELPER_FUNCTIONS
 
@@ -168,3 +182,4 @@ console
   .pauseFor(300)
   .callFunction(() => addProject(projects[2])); // show third project
 
+getCommentsList();
