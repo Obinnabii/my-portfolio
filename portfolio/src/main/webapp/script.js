@@ -62,7 +62,7 @@ async function getCommentsList() {
     let clen = comments.length;             
     for (i = 0; i < clen; i++) {            // loop through
       console.log(comments[i]);
-      addToList(comments[i], commentContainer)
+      addToList(comments[i], commentContainer);
     } 
   });
 }
