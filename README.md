@@ -1,11 +1,11 @@
 # Google Student Training in Engineering Program
 
-##Obi Abii's __portfolio__
+## Obi Abii's __projects__
 
 This repo contains Obi's *STEP projects*. As of now, I have implemented 0 of the projects.
-###The Projects
+### The Projects
 
-1. NaN		0%
+1. *Portfolio*		90%
 2. NaN		0%
 3. NaN		0%
 4. NaN		0%
