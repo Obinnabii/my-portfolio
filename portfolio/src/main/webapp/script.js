@@ -34,7 +34,7 @@ const PROJECTS = ['project_0', 'project_1', 'project_2']
 const COMMENTS_ID = "comment-container";
 
 /** 
-* The id of the list where comments will be placed
+* The id of the div where comments will be placed
 * @type {String}
 */
 const WELCOME_ID = "hello-container";
@@ -59,6 +59,7 @@ async function getCommentsList() {
   .then(response => response.json()) 
   .then((comments) => { 
     let commentContainer = document.getElementById(COMMENTS_ID); 
+    commentContainer.innerHTML = '';        // clear current div
     let clen = comments.length;             
     for (i = 0; i < clen; i++) {            // loop through
       console.log(comments[i]);
