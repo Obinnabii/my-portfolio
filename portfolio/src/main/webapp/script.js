@@ -26,14 +26,16 @@ async function getWelcomeMessage() {
 * Get a list of comments  from the serverlet.
 */
 async function getCommentsList() {
-    fetch('/data')                          // look above for simple explanation
-    .then(response => response.json()) 
-    .then((comments) => { 
-    console.log(comments[0]);
-    console.log(comments[1]);
-    console.log(comments[2]);
-});
+  fetch('/data')                          // look above for simple explanation
+  .then(response => response.json()) 
+  .then((comments) => { 
+    let clen = comments.length;             // length of list
+    for (i = 0; i < clen; i++) {            // loop through
+      console.log(comments[i]);
+    } 
+  });
 }
+
 
 
 // HELPER_FUNCTIONS
