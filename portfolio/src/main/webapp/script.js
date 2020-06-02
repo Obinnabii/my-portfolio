@@ -12,7 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+// DIV_IDs
+
+/** 
+* The id of the div where the portfolio main text will be printed.
+* @const {String}
+*/
+const CONSOLE_ID = "console";
+
+/** 
+* List of project_ids 
+* @const {!Array<String>}
+*/
+const PROJECTS = ['project_0', 'project_1', 'project_2']
+
+/** 
+* The id of the div where comments will be placed
+* @type {String}
+*/
+const COMMENTS_ID = "comments-container";
+
+/** 
+* The id of the div where comments will be placed
+* @type {String}
+*/
+const COMMENTS_ID = "comments-container";
+
+
 // SERVER_FUNCTIONS
+
 /**
  * Get a welcome message from the serverlet and put it in the welcome container.
  */
@@ -37,7 +66,6 @@ async function getCommentsList() {
 }
 
 
-
 // HELPER_FUNCTIONS
 
 /** 
@@ -58,6 +86,17 @@ function typify(div_id) {
   });
 }
 
+/** 
+* adds an <li> element containing @param text to the HTML Element @param list.
+* @param {String} text
+* @param {HTMLElement} list
+*/
+function addToList(text, list) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  list.appendChild(liElement);
+}
+
 /**
 * Make project div visible visible
 * @param {String} div_id A string that refers to the ID of a project div in the HTML file.
@@ -66,19 +105,20 @@ function addProject(div_id){
   document.getElementById(div_id).style.visibility = 'visible';
 }
 
+
 // TEXT
 
 /** 
 * Heading text 
 * @type {String}
 */
-const headingText = `<div class="row"> <h1> Obi Abii's Portfolio </h1> </div>`; 
+const headingBlurb = `<div class="row"> <h1> Obi Abii's Portfolio </h1> </div>`; 
 
 /** 
 * About me blurb 
 * @type {String}
 */
-const aboutMeText = `
+const aboutMeBlurb = `
   <div class="row"> 
     <p>Hi, My name is Obi and this is my <span class="emphasis">portfolio! <br></span></p>
     <p>I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020. My main career focus is 
@@ -144,44 +184,31 @@ const projectsBlurb = `
   <div class="row"> <p> Below is a selection of some of my favorite projects.</p></div>`
 
 
-// DIV_ID
-
-/** 
-* The id of the div where the above text will be placed 
-* @type {String}
-*/
-const consoleId = "console";
-
-/** 
-* List of project_ids 
-* @type {!Array<String>}
-*/
-const projects = ['project_0', 'project_1', 'project_2']
-
 // TYPEWRITERS
 
 /**
 * The typewriter corresponding to the 'console_id' div
 * @type {Typewriter}
 */
-let myConsole = typify(consoleId);
+let myConsole = typify(CONSOLE_ID);
+
 
 // FUNCTION CALLS
 
 /**print the initial text blurbs */
 myConsole
-  .typeString(headingText) 
+  .typeString(HEADING_TEXT) 
   .pauseFor(300)
-  .typeString(aboutMeText) 
+  .typeString(ABOUT_ME_TEXT) 
   .pauseFor(300)
-  .typeString(languageBlurb) 
+  .typeString(LANGUAGE_BLURB) 
   .pauseFor(300)
-  .typeString(projectsBlurb) 
+  .typeString(PROJECTS_BLURB) 
   .pauseFor(300)
-  .callFunction(() => addProject(projects[0])) //show first project
+  .callFunction(() => addProject(PROJECTS[0])) //show first project
   .pauseFor(300)
-  .callFunction(() => addProject(projects[1])) // show second project
+  .callFunction(() => addProject(PROJECTS[1])) // show second project
   .pauseFor(300)
-  .callFunction(() => addProject(projects[2])); // show third project
+  .callFunction(() => addProject(PROJECTS[2])); // show third project
 
 getCommentsList();
