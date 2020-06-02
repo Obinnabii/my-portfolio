@@ -70,13 +70,13 @@ function addProject(div_id){
 * Heading text 
 * @type {String}
 */
-const heading_text = `<div class="row"> <h1> Obi Abii's Portfolio </h1> </div>`; 
+const headingText = `<div class="row"> <h1> Obi Abii's Portfolio </h1> </div>`; 
 
 /** 
 * About me blurb 
 * @type {String}
 */
-const about_me_text = `
+const aboutMeText = `
   <div class="row"> 
     <p>Hi, My name is Obi and this is my <span class="emphasis">portfolio! <br></span></p>
     <p>I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020. My main career focus is 
@@ -88,7 +88,7 @@ const about_me_text = `
 * blurb containg information about the languages I know 
 * @type {String}
 */
-const language_blurb = `
+const languageBlurb = `
   <div class="row"> 
     <h2>languages</h2>
   </div>
@@ -137,7 +137,7 @@ const language_blurb = `
 * blurb containg information about the languages I know 
 * @type {String}
 */
-const projects_blurb = `
+const projectsBlurb = `
   <div class="row"> <h2>projects</h2></div>
   <div class="row"> <p> Below is a selection of some of my favorite projects.</p></div>`
 
@@ -148,7 +148,7 @@ const projects_blurb = `
 * The id of the div where the above text will be placed 
 * @type {String}
 */
-const console_id = "console";
+const consoleId = "console";
 
 /** 
 * List of project_ids 
@@ -162,19 +162,19 @@ const projects = ['project_0', 'project_1', 'project_2']
 * The typewriter corresponding to the 'console_id' div
 * @type {Typewriter}
 */
-let myConsole = typify(console_id);
+let myConsole = typify(consoleId);
 
 // FUNCTION CALLS
 
 /**print the initial text blurbs */
 myConsole
-  .typeString(heading_text) 
+  .typeString(headingText) 
   .pauseFor(300)
-  .typeString(about_me_text) 
+  .typeString(aboutMeText) 
   .pauseFor(300)
-  .typeString(language_blurb) 
+  .typeString(languageBlurb) 
   .pauseFor(300)
-  .typeString(projects_blurb) 
+  .typeString(projectsBlurb) 
   .pauseFor(300)
   .callFunction(() => addProject(projects[0])) //show first project
   .pauseFor(300)
