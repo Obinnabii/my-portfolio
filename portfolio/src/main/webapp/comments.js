@@ -54,5 +54,4 @@ function addToList(text, list) {
   list.appendChild(liElement);
 }
 
-
-//TEXT
+getCommentsList();
