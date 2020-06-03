@@ -123,14 +123,14 @@ const headingBlurb = `<div class="row"> <h1> Obi Abii's Portfolio </h1> </div>`;
 */
 const aboutMeBlurb = `
   <div class="row"> 
-    <p>Hi, My name is Obi and this is my <span class="emphasis">portfgit olio! <br></span></p>
+    <p>Hi, My name is Obi and this is my <span class="emphasis">portfolio! <br></span></p>
     <p>I'm a CS Major at Cornell, currently interning at Google for the Summer of 2020. My main career focus is 
        <span class="emphasis">software engineering</span>. I am particularly interested in <span class="emphasis">Machine learning.</span>
     </p>
   </div>`;
 
 /**
-* blurb containg information about the languages I know 
+* blurb containing information about the languages I know 
 * @type {String}
 */
 const languageBlurb = `
@@ -179,7 +179,7 @@ const languageBlurb = `
   </div>`
 
 /**
-* blurb containg information about the languages I know 
+* blurb containing information about the languages I know 
 * @type {String}
 */
 const projectsBlurb = `
