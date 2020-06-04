@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.sql.Timestamp;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +53,15 @@ public class DataServlet extends HttpServlet {
     // Get the input from the form.
     String comment = request.getParameter("comment-input");
     if (!comment.isBlank()) { 
-      comments.add(comment); 
+      long timestamp = System.currentTimeMillis();
+      Entity commentEntity = new Entity("Comment");
+
+      commentEntity.setProperty("comment", comment);
+      commentEntity.setProperty("timestamp", timestamp);
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
+      comments.add(comment);
     }
     
     // Redirect back to page
