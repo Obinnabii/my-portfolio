@@ -59,7 +59,7 @@ async function getCommentsList() {
   .then(response => response.json()) 
   .then((comments) => { 
     let commentContainer = document.getElementById(COMMENTS_ID); 
-    commentContainer.innerHTML = '';        // clear current div
+    commentContainer.innerHTML = '';        // clear current comments
     let clen = comments.length;             
     for (i = 0; i < clen; i++) {
       console.log(comments[i]);
