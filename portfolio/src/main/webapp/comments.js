@@ -27,7 +27,7 @@ const COMMENTS_ID = "comment-container";
 * Get a list of comments  from the serverlet.
 */
 async function getCommentsList() {
-  fetch('/data')                          // look above for simple explanation
+  fetch('/comments')                          // look above for simple explanation
   .then(response => response.json()) 
   .then((comments) => { 
     let commentContainer = document.getElementById(COMMENTS_ID); 
