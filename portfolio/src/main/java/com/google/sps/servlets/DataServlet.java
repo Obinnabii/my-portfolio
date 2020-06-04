@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
   private ArrayList<String> comments;
@@ -31,8 +31,8 @@ public class DataServlet extends HttpServlet {
   @Override
   public void init() {
     comments = new ArrayList<String>();
-    comments.add("Obi is so hot!");
-    comments.add("obi is the coolest!");
+    comments.add("Wow, Obi nice website!");
+    comments.add("I love the color scheme");
     comments.add("We love you Obi!");
   }
 
@@ -44,6 +44,18 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String comment = getParameter(request, "comment-input", "");
+    comments.add(comment);
+
+    // Redirect back to page
+    response.sendRedirect("comments.html");
+  }
+
+  // HELPER_FUNCTIONS
+
     /**
    * Converts a ArrayList<String> instance into a JSON string
    */
@@ -51,6 +63,18 @@ public class DataServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(arrList);
     return json;
+  }
+
+  /**
+   * @return the request parameter, or the default value if the parameter
+   *         was not specified by the client
+   */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 
 }
