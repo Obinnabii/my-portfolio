@@ -81,9 +81,8 @@ function anchorfy(link) {
 * Add nav bar to page
 */
 function createNavBar() {
-  let navBar = document.getElementById(NAV_ID); // get nav bar
-  let len = LINKS.length;             
-  for (i = 0; i < len; i++) {            // loop through
+  let navBar = document.getElementById(NAV_ID);         
+  for (i = 0; i < LINKS.length; i++) {            
     console.log(LINKS[i]);
     let a = anchorfy(LINKS[i]);
     navBar.appendChild(a);
