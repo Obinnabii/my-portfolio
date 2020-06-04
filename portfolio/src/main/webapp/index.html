@@ -28,17 +28,15 @@
       <header>
         <!-- Navigation bar at the top -->
         <div class = "row">
-          <nav>
-            <a target ="_blank" href="mailto: coa22@cornell.edu" class="nav_bar">/email_me</a>
-            <a target ="_blank" href="https://github.com/Obinnabii" class="nav_bar">/see_github</a>
-            <a target ="_blank" href="https://drive.google.com/file/d/1tc2YaWmPzVhdCSb3Gv6VVz-599Qa5CrT/view?usp=sharing" class="nav_bar ">/see_resume</a>
-            <a href="javascript:getWelcomeMessage()">/welcome</a>
-          </nav>
+          <nav id ="my-nav"></nav>
         </div>
       </header>
 
       <!-- Welcome -->
       <div id="hello-container"></div>
+
+      <!-- Comments -->
+      <div id="comment-container"></div>
 
       <!-- Console -->
       <div id="console"></div>
@@ -107,6 +105,7 @@
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
     <!-- Custom JS -->
+    <script src="nav.js"></script>
     <script src="script.js"></script>
 
   </body>
