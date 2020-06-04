@@ -48,13 +48,13 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String comment = request.getParameter("comment-input");
-    if (!comment.isBlank()) { comments.add(comment); }
+    if (!comment.isBlank()) { 
+      comments.add(comment); 
+    }
     
     // Redirect back to page
     response.sendRedirect("comments.html");
   }
-
-  // HELPER_FUNCTIONS
 
     /**
    * Converts a ArrayList<String> instance into a JSON string
