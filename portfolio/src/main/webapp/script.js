@@ -90,7 +90,7 @@ function typify(div_id) {
 }
 
 /** 
-* adds an <li> element containing @param text to the HTML Element @param list.
+* adds a <li> element containing @param text to the HTML Element @param list.
 * @param {String} text
 * @param {HTMLElement} list
 */
