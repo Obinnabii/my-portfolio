@@ -47,9 +47,11 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
-    String comment = getParameter(request, "comment-input");
-    if (comment) { comments.add(comment); }
-    
+    String comment = getParameter(request, "comment-input", "");
+    if (!comment.isBlank()) { 
+      System.out.println(comment);
+      comments.add(comment); 
+    }
     // Redirect back to page
     response.sendRedirect("comments.html");
   }
@@ -76,14 +78,4 @@ public class DataServlet extends HttpServlet {
     }
     return value;
   }
-  
-    /**
-   * @return the request parameter, or null if the parameter
-   *         was not specified by the client
-   */
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    return value;
-  }
-
 }
