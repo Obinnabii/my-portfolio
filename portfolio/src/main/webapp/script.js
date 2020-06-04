@@ -52,7 +52,7 @@ async function getWelcomeMessage() {
 }
 
 /**
-* Get a list of comments  from the serverlet.
+* Get a list of comments  from the servlet.
 */
 async function getCommentsList() {
   fetch('/data')                          // look above for simple explanation
