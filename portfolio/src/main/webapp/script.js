@@ -101,7 +101,7 @@ function addToList(text, list) {
 }
 
 /**
-* Make project div visible visible
+* Make project div visible
 * @param {String} div_id A string that refers to the ID of a project div in the HTML file.
 */
 function addProject(div_id){
