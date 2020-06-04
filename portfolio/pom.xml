@@ -35,8 +35,8 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
-          <deploy.projectId>ObiAbii</deploy.projectId>
-          <deploy.version>1</deploy.version>
+          <deploy.projectId>step2020-277817</deploy.projectId>
+          <deploy.version>2</deploy.version>
         </configuration>
       </plugin>
     </plugins>
