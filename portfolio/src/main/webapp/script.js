@@ -61,7 +61,7 @@ async function getCommentsList() {
     let commentContainer = document.getElementById(COMMENTS_ID); 
     commentContainer.innerHTML = '';        // clear current div
     let clen = comments.length;             
-    for (i = 0; i < clen; i++) {            // loop through
+    for (i = 0; i < clen; i++) {
       console.log(comments[i]);
       addToList(comments[i], commentContainer);
     } 
