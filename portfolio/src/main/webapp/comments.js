@@ -13,21 +13,18 @@
 // limitations under the License.
 
 // DIV_IDs
-
 /** 
 * The id of the div where comments will be placed
 * @type {String}
 */
 const COMMENTS_ID = "comment-container";
 
-
 // SERVER_FUNCTIONS
-
 /**
 * Get a list of comments  from the serverlet.
 */
 async function getCommentsList() {
-  fetch('/data')                          // look above for simple explanation
+  fetch('/comments')                          
   .then(response => response.json()) 
   .then((comments) => { 
     let commentContainer = document.getElementById(COMMENTS_ID); 
@@ -39,9 +36,7 @@ async function getCommentsList() {
   });
 }
 
-
 // HELPER_FUNCTIONS
-
 /** 
 * adds an <li> element containing @param text to the HTML Element @param list.
 * @param {String} text
