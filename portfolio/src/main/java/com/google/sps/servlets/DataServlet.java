@@ -36,7 +36,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("Comment").addSort("postTime", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -44,9 +44,9 @@ public class DataServlet extends HttpServlet {
     for (Entity commentEntity : results.asIterable()) {
       long id = commentEntity.getKey().getId();
       String text = (String) commentEntity.getProperty("text");
-      long timestamp = (long) commentEntity.getProperty("timestamp");
+      long postTime = (long) commentEntity.getProperty("postTime");
 
-      Comment comment = new Comment(id, text, timestamp);
+      Comment comment = new Comment(id, text, postTime);
       commentList.add(comment);
     }
 
@@ -64,7 +64,7 @@ public class DataServlet extends HttpServlet {
       Entity commentEntity = new Entity("Comment");
 
       commentEntity.setProperty("text", text);
-      commentEntity.setProperty("timestamp", commentPostTime);
+      commentEntity.setProperty("postTime", commentPostTime);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
