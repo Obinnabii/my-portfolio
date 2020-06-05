@@ -31,6 +31,7 @@ async function getCommentsList() {
                       .options[maxNoCommentsSelector.selectedIndex]
                       .value;             
   let commentsUrl = '/comments?maxNoComments=' + maxNoComments;
+
   fetch(commentsUrl).then(response => response.json()).then((comments) => { 
     let commentContainer = document.getElementById(COMMENTS_ID);
     commentContainer.innerHTML = '';
@@ -54,6 +55,7 @@ function addToList(commentObj, list) {
   deleteButtonElement.innerText = 'Delete';
   deleteButtonElement.addEventListener('click', () => {
     deleteCommentFromDB(commentObj);
+    comment.remove();
     getCommentsList();
   });
   
@@ -72,9 +74,10 @@ function submitCommentOnEnter(event) {
   }
 }
 
-/** Tells the server to delete the task. */
-function deleteCommentFromDB(comment) {
+/** Tells the server to delete the comment and refresh the page */
+async function deleteCommentFromDB(comment) {
   const params = new URLSearchParams();
   params.append('id',comment.id);
-  fetch('/delete-comment', {method: 'POST', body: params});
+  fetch('/delete-comment', {method: 'POST', body: params})
+  .then(getCommentsList());
 }
