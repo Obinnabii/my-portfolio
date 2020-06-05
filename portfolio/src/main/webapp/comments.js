@@ -18,15 +18,22 @@
 * @type {String}
 */
 const COMMENTS_ID = "comment-container";
-const COMMENT_FORM_ID = "comment-form"
+const COMMENT_FORM_ID = "comment-form";
+const COMMENT_MAX_NO_ID = "comment-max-no";
 
 // SERVER_FUNCTIONS
 /**
 * Get a list of comments  from the serverlet.
 */
 async function getCommentsList() {
-  fetch('/comments').then(response => response.json()).then((comments) => { 
+  let maxNoCommentsSelector = document.getElementById(COMMENT_MAX_NO_ID);
+  let maxNoComments = maxNoCommentsSelector
+                      .options[maxNoCommentsSelector.selectedIndex]
+                      .value;             
+  let commentsUrl = '/comments?maxNoComments=' + maxNoComments;
+  fetch(commentsUrl).then(response => response.json()).then((comments) => { 
     let commentContainer = document.getElementById(COMMENTS_ID);
+    commentContainer.innerHTML = '';
     comments.forEach((comment) => {
       addToList(comment.text, commentContainer);
     })

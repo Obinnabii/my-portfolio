@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
@@ -36,15 +37,22 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    int maxNoComments = getMaxComments(request);
+
     Query query = new Query("Comment").addSort("postTime", SortDirection.ASCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
+    FetchOptions commentsQueryOptions = FetchOptions.Builder
+                                        .withLimit(maxNoComments);
+
     ArrayList<Comment> commentList = new ArrayList<>();
-    for (Entity commentEntity : results.asIterable()) {
+    for (Entity commentEntity : results.asIterable(commentsQueryOptions)) {
       long id = commentEntity.getKey().getId();
       String text = (String) commentEntity.getProperty("text");
       long postTime = (long) commentEntity.getProperty("postTime");
+
+
 
       Comment comment = new Comment(id, text, postTime);
       commentList.add(comment);
@@ -71,5 +79,21 @@ public class DataServlet extends HttpServlet {
     }
     
     response.sendRedirect("comments.html");
+  }
+
+  /** Returns the max number of comments entered by the user */
+  private int getMaxComments(HttpServletRequest request) {
+    // Get the input from the form.
+    String maxNoCommentsString = request.getParameter("maxNoComments");
+
+    // Convert the input to an int.
+    int maxNoComments;
+    try {
+      maxNoComments = Integer.parseInt(maxNoCommentsString);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + maxNoCommentsString);
+      return -1;
+    }
+    return maxNoComments;
   }
 }

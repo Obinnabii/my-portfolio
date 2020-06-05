@@ -27,6 +27,13 @@
     </header>
     
     <!-- Comments -->
+    <!-- Number of comments dropdown -->
+    <label for="comment-max-no">Number of comments to diplay</label>
+    <select form="comment-form" id="comment-max-no" name="comment-max-no" onchange="getCommentsList()" >
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+    </select>
     <div id="comment-container"></div>
       <form id="comment-form" action="/comments" method="POST">
         <textarea name="comment-input"></textarea>
