@@ -19,7 +19,7 @@ public final class Comment {
 
   private final long id;
   private final String text;
-  private final long timestamp;
+  private final long postTime;
 
   public Comment(long id, String text, long postTime) {
     this.id = id;
