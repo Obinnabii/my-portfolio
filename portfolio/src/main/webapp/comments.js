@@ -43,5 +43,3 @@ function addToList(text, list) {
   liElement.innerText = text;
   list.appendChild(liElement);
 }
-
-getCommentsList();
