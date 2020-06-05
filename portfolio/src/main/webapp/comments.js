@@ -18,6 +18,7 @@
 * @type {String}
 */
 const COMMENTS_ID = "comment-container";
+const COMMENT_FORM_ID = "comment-form"
 
 // SERVER_FUNCTIONS
 /**
@@ -42,4 +43,14 @@ function addToList(text, list) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   list.appendChild(liElement);
+}
+
+/** 
+* submits the comment form when the enter key is pressed without the shift key
+* @param {Event} event the onkeydown event
+*/
+function submitCommentOnEnter(event) {
+  if (event.keyCode == 13 && !event.shiftKey) {
+    document.getElementById(COMMENT_FORM_ID).submit();
+  }
 }
