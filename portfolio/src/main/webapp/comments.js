@@ -24,15 +24,11 @@ const COMMENTS_ID = "comment-container";
 * Get a list of comments  from the serverlet.
 */
 async function getCommentsList() {
-  fetch('/comments')                          
-  .then(response => response.json()) 
-  .then((comments) => { 
-    let commentContainer = document.getElementById(COMMENTS_ID); 
-    commentContainer.innerHTML = '';        // clear current div
-    for (i = 0; i < comments.length; i++) {
-      console.log(comments[i]);
-      addToList(comments[i], commentContainer);
-    } 
+  fetch('/comments').then(response => response.json()).then((comments) => { 
+    let commentContainer = document.getElementById(COMMENTS_ID);
+    comments.forEach((comment) => {
+      addToList(comment.text, commentContainer);
+    })
   });
 }
 
