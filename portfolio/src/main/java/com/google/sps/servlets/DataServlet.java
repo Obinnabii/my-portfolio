@@ -83,7 +83,6 @@ public class DataServlet extends HttpServlet {
 
   /** Returns the max number of comments entered by the user */
   private int getMaxComments(HttpServletRequest request) {
-    // Get the input from the form.
     String maxCommentsString = request.getParameter("maxComments");
 
     int maxComments;
