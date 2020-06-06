@@ -86,7 +86,6 @@ public class DataServlet extends HttpServlet {
     // Get the input from the form.
     String maxNoCommentsString = request.getParameter("maxNoComments");
 
-    // Convert the input to an int.
     int maxNoComments;
     try {
       maxNoComments = Integer.parseInt(maxNoCommentsString);
