@@ -77,7 +77,6 @@ public class DataServlet extends HttpServlet {
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
     }
-    response.sendRedirect("comments.html");
   }
 
   /** Returns the max number of comments entered by the user */

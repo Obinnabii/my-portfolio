@@ -14,26 +14,26 @@
 
 // DIV_IDs
 /** 
-* The id of the div where comments will be placed
-* @type {String}
-*/
+ * The id of the div where comments will be placed
+ * @type {String}
+ */
 const COMMENTS_ID = "comment-container";
 const COMMENT_FORM_ID = "comment-form";
 const MAX_COMMENTS_ID = "max-comments";
 
 // SERVER_FUNCTIONS
 /**
-* Get a list of comments  from the serverlet.
-*/
+ * Get a list of comments  from the serverlet.
+ */
 async function getCommentsList() {
   let maxCommentsSelector = document.getElementById(MAX_COMMENTS_ID);
   let maxComments = maxCommentsSelector
-                      .options[maxCommentsSelector.selectedIndex]
-                      .value;             
+    .options[maxCommentsSelector.selectedIndex]
+    .value;
 
   let commentsUrl = '/comments?maxComments=' + maxComments;
 
-  fetch(commentsUrl).then(response => response.json()).then((comments) => { 
+  fetch(commentsUrl).then(response => response.json()).then((comments) => {
     let commentContainer = document.getElementById(COMMENTS_ID);
     commentContainer.innerHTML = '';
     comments.forEach((comment) => {
@@ -44,10 +44,10 @@ async function getCommentsList() {
 
 // HELPER_FUNCTIONS
 /** 
-* adds an <li> element containing @param text to the HTML Element @param list.
-* @param {String} text
-* @param {HTMLElement} list
-*/
+ * adds an <li> element containing @param text to the HTML Element @param list.
+ * @param {String} text
+ * @param {HTMLElement} list
+ */
 function addToList(commentObj, list) {
   const comment = document.createElement('li');
   comment.innerText = commentObj.text;
@@ -59,26 +59,37 @@ function addToList(commentObj, list) {
     comment.remove();
     getCommentsList();
   });
-  
+
   comment.appendChild(deleteButtonElement);
   list.appendChild(comment);
 }
 
 
 /** 
-* submits the comment form when the enter key is pressed without the shift key
-* @param {Event} event the onkeydown event
-*/
+ * submits the comment form when the enter key is pressed without the shift key
+ * @param {Event} event the onkeydown event
+ */
 function submitCommentOnEnter(event) {
   if (event.keyCode == 13 && !event.shiftKey) {
     document.getElementById(COMMENT_FORM_ID).submit();
   }
 }
 
+/** Posts a comment to the sever */
+async function postComment(commentSubmissionEvent) {
+  // Avoid redirection
+  commentSubmissionEvent.preventDefault();
+
+  const params = new URLSearchParams(
+    new FormData(document.getElementById(COMMENT_FORM_ID)))
+  fetch('/comments', { method: 'POST', body: params })
+    .then(resp => getCommentsList());
+}
+
 /** Tells the server to delete the comment and refresh the page */
 async function deleteCommentFromDB(comment) {
   const params = new URLSearchParams();
-  params.append('id',comment.id);
-  fetch('/delete-comment', {method: 'POST', body: params})
-  .then(getCommentsList());
+  params.append('id', comment.id);
+  fetch('/delete-comment', { method: 'POST', body: params })
+    .then(resp => getCommentsList());
 }
