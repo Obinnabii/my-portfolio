@@ -37,14 +37,14 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int maxNoComments = getMaxComments(request);
+    int maxComments = getMaxComments(request);
 
     Query query = new Query("Comment").addSort("postTime", SortDirection.ASCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     FetchOptions commentsQueryOptions = FetchOptions.Builder
-                                        .withLimit(maxNoComments);
+                                        .withLimit(maxComments);
 
     ArrayList<Comment> commentList = new ArrayList<>();
     for (Entity commentEntity : results.asIterable(commentsQueryOptions)) {
@@ -84,15 +84,15 @@ public class DataServlet extends HttpServlet {
   /** Returns the max number of comments entered by the user */
   private int getMaxComments(HttpServletRequest request) {
     // Get the input from the form.
-    String maxNoCommentsString = request.getParameter("maxNoComments");
+    String maxCommentsString = request.getParameter("maxComments");
 
-    int maxNoComments;
+    int maxComments;
     try {
-      maxNoComments = Integer.parseInt(maxNoCommentsString);
+      maxComments = Integer.parseInt(maxCommentsString);
     } catch (NumberFormatException e) {
-      System.err.println("Could not convert to int: " + maxNoCommentsString);
+      System.err.println("Could not convert to int: " + maxCommentsString);
       return -1;
     }
-    return maxNoComments;
+    return maxComments;
   }
 }
