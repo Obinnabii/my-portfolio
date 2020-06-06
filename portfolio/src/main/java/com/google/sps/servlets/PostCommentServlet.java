@@ -32,37 +32,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/comments")
-public class DataServlet extends HttpServlet {
-
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int maxComments = getMaxComments(request);
-
-    Query query = new Query("Comment").addSort("postTime", SortDirection.ASCENDING);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
-
-    FetchOptions commentsQueryOptions = FetchOptions.Builder
-                                        .withLimit(maxComments);
-
-    ArrayList<Comment> commentList = new ArrayList<>();
-    for (Entity commentEntity : results.asIterable(commentsQueryOptions)) {
-      long id = commentEntity.getKey().getId();
-      String text = (String) commentEntity.getProperty("text");
-      long postTime = (long) commentEntity.getProperty("postTime");
-
-
-
-      Comment comment = new Comment(id, text, postTime);
-      commentList.add(comment);
-    }
-
-    Gson gson = new Gson();
-
-    response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(commentList));
-  }
+@WebServlet("/post-comment")
+public class PostCommentServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -77,19 +48,5 @@ public class DataServlet extends HttpServlet {
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
     }
-  }
-
-  /** Returns the max number of comments entered by the user */
-  private int getMaxComments(HttpServletRequest request) {
-    String maxCommentsString = request.getParameter("maxComments");
-
-    int maxComments;
-    try {
-      maxComments = Integer.parseInt(maxCommentsString);
-    } catch (NumberFormatException e) {
-      System.err.println("Could not convert to int: " + maxCommentsString);
-      return -1;
-    }
-    return maxComments;
   }
 }
