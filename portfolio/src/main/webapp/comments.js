@@ -79,7 +79,7 @@ async function postComment(commentSubmissionEvent) {
 
   const params = new URLSearchParams(
     new FormData(document.getElementById(COMMENT_FORM_ID)))
-  fetch('/comments', { method: 'POST', body: params })
+  fetch('/post-comment', { method: 'POST', body: params })
     .then(resp => getCommentsList());
 }
 
