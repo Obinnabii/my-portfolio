@@ -18,27 +18,27 @@
 <link rel="stylesheet" href="style.css">
 
 <body onload="getCommentsList()">
-  <div id="content" class = "container-md">
+  <div id="content" class="container-md">
     <header>
       <!-- Navigation bar at the top -->
-      <div class = "row">
-        <nav id ="my-nav"></nav>
+      <div class="row">
+        <nav id="my-nav"></nav>
       </div>
     </header>
-    
+
     <!-- Comments -->
     <!-- Number of comments dropdown -->
     <label for="max-comments">Number of comments to diplay</label>
-    <select form="comment-form" id="max-comments" name="max-comments" onchange="getCommentsList()" >
+    <select form="comment-form" id="max-comments" name="max-comments" onchange="getCommentsList()">
       <option value="5">5</option>
       <option value="10">10</option>
       <option value="20">20</option>
     </select>
     <div id="comment-container"></div>
-      <form id="comment-form" action="/comments" method="POST">
-        <textarea name="comment-input"></textarea>
-        <input type="submit"/>
-      </form>
+    <form id="comment-form" onsubmit="postComment(event)" action="/comments" method="POST">
+      <textarea name="comment-input"></textarea>
+      <input type="submit" />
+    </form>
   </div>
 
   <!-- SCRIPTS  -->
