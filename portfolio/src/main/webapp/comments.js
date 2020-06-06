@@ -31,7 +31,7 @@ async function getCommentsList() {
     .options[maxCommentsSelector.selectedIndex]
     .value;
 
-  let commentsUrl = '/comments?maxComments=' + maxComments;
+  let commentsUrl = '/get-comments?maxComments=' + maxComments;
 
   fetch(commentsUrl).then(response => response.json()).then((comments) => {
     let commentContainer = document.getElementById(COMMENTS_ID);
@@ -61,7 +61,7 @@ function addToList(commentObj, list) {
   });
 
   comment.appendChild(deleteButtonElement);
-  list.appendChild(comment);
+  list.prepend(comment);
 }
 
 
@@ -82,7 +82,7 @@ async function postComment(commentSubmissionEvent) {
 
   const params = new URLSearchParams(
     new FormData(document.getElementById(COMMENT_FORM_ID)))
-  fetch('/comments', { method: 'POST', body: params })
+  fetch('/post-comment', { method: 'POST', body: params })
     .then(resp => getCommentsList());
 }
 
