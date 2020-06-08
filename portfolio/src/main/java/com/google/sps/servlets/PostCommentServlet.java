@@ -40,10 +40,10 @@ public class PostCommentServlet extends HttpServlet {
     String text = request.getParameter("comment-input");
     if (!text.isBlank()) { 
       long commentPostTime = System.currentTimeMillis();
-      Entity commentEntity = new Entity("Comment");
+      Entity commentEntity = new Entity(Comment.ENTITY_NAME);
 
-      commentEntity.setProperty("text", text);
-      commentEntity.setProperty("postTime", commentPostTime);
+      commentEntity.setProperty(Comment.TEXT_FIELD, text);
+      commentEntity.setProperty(Comment.POST_TIME_FIELD, commentPostTime);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
