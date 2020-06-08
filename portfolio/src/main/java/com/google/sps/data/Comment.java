@@ -20,6 +20,10 @@ public final class Comment {
   private final long id;
   private final String text;
   private final long postTime;
+  // Constants
+  public static String ENTITY_NAME = "Comment";
+  public static String POST_TIME_FIELD = "postTime";
+  public static String TEXT_FIELD = "text";  
 
   public Comment(long id, String text, long postTime) {
     this.id = id;

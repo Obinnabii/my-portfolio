@@ -31,15 +31,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/comments")
-public class DataServlet extends HttpServlet {
+/** Servlet that returns comments data */
+@WebServlet("/get-comments")
+public class GetCommentsServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int maxComments = getMaxComments(request);
 
-    Query query = new Query("Comment").addSort("postTime", SortDirection.ASCENDING);
+    Query query = new Query(Comment.ENTITY_NAME).addSort(Comment.POST_TIME_FIELD, SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -49,35 +49,15 @@ public class DataServlet extends HttpServlet {
     ArrayList<Comment> commentList = new ArrayList<>();
     for (Entity commentEntity : results.asIterable(commentsQueryOptions)) {
       long id = commentEntity.getKey().getId();
-      String text = (String) commentEntity.getProperty("text");
-      long postTime = (long) commentEntity.getProperty("postTime");
-
-
+      String text = (String) commentEntity.getProperty(Comment.TEXT_FIELD);
+      long postTime = (long) commentEntity.getProperty(Comment.POST_TIME_FIELD);
 
       Comment comment = new Comment(id, text, postTime);
       commentList.add(comment);
     }
-
     Gson gson = new Gson();
-
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(commentList));
-  }
-
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String text = request.getParameter("comment-input");
-    if (!text.isBlank()) { 
-      long commentPostTime = System.currentTimeMillis();
-      Entity commentEntity = new Entity("Comment");
-
-      commentEntity.setProperty("text", text);
-      commentEntity.setProperty("postTime", commentPostTime);
-
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(commentEntity);
-    }
-    response.sendRedirect("comments.html");
   }
 
   /** Returns the max number of comments entered by the user */
