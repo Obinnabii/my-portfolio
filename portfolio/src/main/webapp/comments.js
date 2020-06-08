@@ -63,7 +63,7 @@ function addToList(commentObj, list) {
 }
 
 /** 
- * submits the comment form when the enter key is pressed without the shift key
+ * Submits the comment form when the enter key is pressed without the shift key
  * @param {Event} The onkeydown event
  */
 function submitCommentOnEnter(event) {
