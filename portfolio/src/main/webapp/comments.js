@@ -23,7 +23,7 @@ const MAX_COMMENTS_ID = "max-comments";
 
 // SERVER_FUNCTIONS
 /**
- * Get a list of comments  from the serverlet.
+ * Get a list of comments from the servlet.
  */
 async function getCommentsList() {
   let maxCommentsSelector = document.getElementById(MAX_COMMENTS_ID);
@@ -72,7 +72,7 @@ function submitCommentOnEnter(event) {
   }
 }
 
-/** Posts a comment to the sever */
+/** Posts a comment to the server */
 function postComment(commentSubmissionEvent) {
   // Avoid redirection
   commentSubmissionEvent.preventDefault();
