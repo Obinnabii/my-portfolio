@@ -79,5 +79,5 @@ async function deleteCommentFromDB(comment) {
   const params = new URLSearchParams();
   params.append('id',comment.id);
   fetch('/delete-comment', {method: 'POST', body: params})
-  .then(getCommentsList());
+    .then(getCommentsList());
 }
