@@ -77,7 +77,7 @@ function submitCommentOnEnter(event) {
 /** Tells the server to delete the comment and refreshes the page. */
 async function deleteCommentFromDB(comment) {
   const params = new URLSearchParams();
-  params.append('id',comment.id);
+  params.append('id', comment.id);
   fetch('/delete-comment', {method: 'POST', body: params})
     .then(getCommentsList());
 }
