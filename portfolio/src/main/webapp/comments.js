@@ -56,8 +56,6 @@ function addToList(commentObj, list) {
   deleteButtonElement.innerText = 'Delete';
   deleteButtonElement.addEventListener('click', () => {
     deleteCommentFromDB(commentObj);
-    comment.remove();
-    getCommentsList();
   });
   
   comment.appendChild(deleteButtonElement);
