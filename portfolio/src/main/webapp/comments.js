@@ -73,7 +73,7 @@ function submitCommentOnEnter(event) {
 }
 
 /** Posts a comment to the sever */
-async function postComment(commentSubmissionEvent) {
+function postComment(commentSubmissionEvent) {
   // Avoid redirection
   commentSubmissionEvent.preventDefault();
 
@@ -83,7 +83,7 @@ async function postComment(commentSubmissionEvent) {
 }
 
 /** Tells the server to delete the comment and refresh the page */
-async function deleteCommentFromDB(comment) {
+function deleteCommentFromDB(comment) {
   const params = new URLSearchParams();
   params.append('id', comment.id);
   fetch('/delete-comment', { method: 'POST', body: params })
