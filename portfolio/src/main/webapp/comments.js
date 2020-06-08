@@ -30,12 +30,14 @@ async function getCommentsList() {
   let maxComments = maxCommentsSelector
                       .options[maxCommentsSelector.selectedIndex]
                       .value;             
+
   let commentsUrl = '/comments?maxComments=' + maxComments;
+
   fetch(commentsUrl).then(response => response.json()).then((comments) => { 
     let commentContainer = document.getElementById(COMMENTS_ID);
     commentContainer.innerHTML = '';
     comments.forEach((comment) => {
-      addToList(comment.text, commentContainer);
+      addToList(comment, commentContainer);
     })
   });
 }
@@ -46,10 +48,18 @@ async function getCommentsList() {
 * @param {String} text
 * @param {HTMLElement} list
 */
-function addToList(text, list) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  list.appendChild(liElement);
+function addToList(commentObj, list) {
+  const comment = document.createElement('li');
+  comment.innerText = commentObj.text;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.addEventListener('click', () => {
+    deleteCommentFromDB(commentObj);
+  });
+  
+  comment.appendChild(deleteButtonElement);
+  list.appendChild(comment);
 }
 
 /** 
@@ -60,4 +70,12 @@ function submitCommentOnEnter(event) {
   if (event.keyCode == 13 && !event.shiftKey) {
     document.getElementById(COMMENT_FORM_ID).submit();
   }
+}
+
+/** Tells the server to delete the comment and refreshes the page. */
+function deleteCommentFromDB(comment) {
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-comment', {method: 'POST', body: params})
+    .then(getCommentsList());
 }
