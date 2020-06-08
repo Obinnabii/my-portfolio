@@ -21,9 +21,9 @@ public final class Comment {
   private final String text;
   private final long postTime;
   //Constants
-  public String ENTITY_NAME = "Comment";
-  public String POST_TIME_FIELD = "postTime";
-  public String TEXT_FIELD = "text";  
+  public static String ENTITY_NAME = "Comment";
+  public static String POST_TIME_FIELD = "postTime";
+  public static String TEXT_FIELD = "text";  
 
   public Comment(long id, String text, long postTime) {
     this.id = id;
