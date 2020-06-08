@@ -76,7 +76,6 @@ function submitCommentOnEnter(event) {
 function postComment(commentSubmissionEvent) {
   // Avoid redirection
   commentSubmissionEvent.preventDefault();
-
   const params = new URLSearchParams(new FormData(document.getElementById(COMMENT_FORM_ID)))
   fetch('/post-comment', { method: 'POST', body: params })
     .then(resp => getCommentsList());
