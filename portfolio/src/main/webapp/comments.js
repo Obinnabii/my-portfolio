@@ -51,16 +51,18 @@ async function getCommentsList() {
 function addToList(commentObj, list) {
   const rowElement = createRowElement();
   const commentElement = createCommentElement(commentObj.text);
-  rowElement.appendChild(commentElement);
-  const deleteButtonElement = createDeleteButtonElement(commentObj);
+  const postTimeElement = createPostTimeElement(commentObj.postTime)
+  const deleteButtonElement = createDeleteButtonElement(commentObj)
+  commentElement.appendChild(postTimeElement);
+  rowElement.appendChild(commentElement)
   rowElement.appendChild(deleteButtonElement);
   list.prepend(rowElement);
 }
 
 /** 
  * Submits the comment form when the enter key is pressed without the shift key
- * @param {Object} commentObj from the query
- * @return {HTMLElement} a delete button
+ * @param {Object} commentObj from a query to the database
+ * @return {HTMLElement} a delete button for @param commentObj
  */
 function createDeleteButtonElement(commentObj) {
   let deleteButtonElement = document.createElement('div');
@@ -74,6 +76,7 @@ function createDeleteButtonElement(commentObj) {
 
 /** 
  * Create a row for a comment
+ * @return {HTMLElement} a new row div
  */
 function createRowElement() {
   let rowElement = document.createElement('div');
@@ -84,16 +87,32 @@ function createRowElement() {
 /** 
  * Create the container for the comment text 
  * @param {String} text the actual text inside the comment
- * @return {HTMLElement} the html element containing the comment text
+ * @return {HTMLElement} the html element containing @param text
  */
 function createCommentElement(text) {
   let commentElement = document.createElement('div');
   commentElement.innerText = text;
   commentElement.className = 'col-10 comment-text';
+  commentElement.appendChild(postTimeElement)
   return commentElement;
 }
 
-/** Posts a comment to the server */
+/** 
+ * Create the container for the timestamp of individual posts
+ * @param {int} postTime in milliseconds
+ * @return {HTMLElement} the html element containing the @param postTime
+ */
+function createPostTimeElement(postTime) {
+  let postTimeElement = document.createElement('small');
+  let postTimeString = ' ' + new Date(postTime).toLocaleString();
+  postTimeElement.innerText = postTimeString
+  return postTimeElement;
+}
+
+/** 
+ * Posts a comment to the servlet 
+ * @param {Event} commentSubmissionEvent  
+ */
 function postComment(commentSubmissionEvent) {
   // Avoid redirection
   commentSubmissionEvent.preventDefault();
@@ -102,10 +121,13 @@ function postComment(commentSubmissionEvent) {
     .then(resp => getCommentsList());
 }
 
-/** Tells the server to delete the comment and refresh the page */
-function deleteCommentFromDB(comment) {
+/** 
+ * Tells the servlet to delete the comment marked by @param commentObj and refreshes the page 
+ * @param {Object} commentObj 
+ */
+function deleteCommentFromDB(commentObj) {
   const params = new URLSearchParams();
-  params.append('id', comment.id);
+  params.append('id', commentObj.id);
   fetch('/delete-comment', { method: 'POST', body: params })
     .then(resp => getCommentsList());
 }
