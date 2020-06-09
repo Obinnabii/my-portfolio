@@ -62,3 +62,11 @@ input[type=submit]:hover {
 small {
   color: rgb(0, 60, 0);
 }
+
+.hide {
+  visibility: hidden;
+}
+
+.uhide {
+  visibility: visible;
+}

@@ -20,6 +20,8 @@
 const COMMENTS_ID = "comment-container";
 const COMMENT_FORM_ID = "comment-form";
 const MAX_COMMENTS_ID = "max-comments";
+// Spans all the parts of the comment section
+const COMMENT_SECTION_ID = "comment-section";
 
 // SERVER_FUNCTIONS
 /**
