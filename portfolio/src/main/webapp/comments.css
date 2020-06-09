@@ -1,11 +1,65 @@
 /* DELETE */
 
 .delete-button {
-  color: rgb(180, 10, 0);
+  color: rgb(200, 10, 0);
+  background-color: white;
+  border: 1px solid gray;
+  padding: 5px 5px;
   text-decoration: none;
+  margin: none;
+  cursor: pointer;
+  width: 10%;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .delete-button:hover {
-  color: rgb(230, 10, 0);
+  background-color: rgb(230, 10, 0);
+  color: rgb(236, 240, 236);
   text-decoration: none;
+  border: none;
+}
+
+
+/* SELECT */
+
+select {
+  width: 100%;
+  padding: 5px 5px;
+  border: 1px solid rgb(161, 159, 159);
+  border-radius: 2px;
+  background-color: rgb(200, 200, 200);
+}
+
+textarea {
+  width: 100%;
+  padding: 5px 5px;
+  max-height: 50%;
+  box-sizing: border-box;
+  border: none;
+  background-color: white;
+  margin-bottom: none;
+}
+
+input[type=submit] {
+  background-color: rgb(39, 77, 40);
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-decoration: none;
+  margin: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type=submit]:hover {
+  background-color: rgb(46, 100, 48);
+}
+
+.comment-text {
+  word-wrap: break-word;
+  padding: 5px 5px;
+  background-color: white;
+  border: 1px solid gray;
+  color: black
 }
