@@ -3,68 +3,70 @@
 a {
   color: rgb(0, 180, 0);
   text-decoration: none;
- }
+}
 
 a:hover {
   color: rgb(0, 230, 0);
   text-decoration: none;
- }
+}
+
 
 /* GENERAL */
 
 body {
   background-color: black;
   color: gainsboro;
-  font-family:  'IBM Plex Mono', 'Fira code', 'Courier New', Courier, monospace;;
- }
+  font-family: 'IBM Plex Mono', 'Fira code', 'Courier New', Courier, monospace;
+  ;
+}
 
 .container {
-  display: flex;
   align-content: center;
- }
+  display: flex;
+}
 
 #content {
   margin-left: auto;
   margin-right: auto;
-  width:800px;
- }
+  width: 800px;
+}
 
 .emphasis {
   color: rgb(0, 170, 0)
 }
 
+
 /* NAV BAR */
 
 nav {
-  padding-top: 3vh;
   padding-bottom: 3vh;
- }
+  padding-top: 3vh;
+}
+
 
 /* PROJECT SECTION */
 
 .project-wrapper {
-  visibility: hidden;
-  padding: 1% 2%;
+  background-color: rgb(10, 10, 10);
   margin: 1%;
-  background-color: rgb(10, 10, 10)
- }
+  padding: 1% 2%;
+  visibility: hidden;
+}
 
 .project-wrapper:hover {
+  background-color: rgb(31, 30, 30);
   border-color: gray;
-  background-color: rgb(31, 30, 30)
- }
+}
 
 .project-img-wrapper {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
 }
 
 .project-img {
-  width: 100%;
+  align-self: center;
   display: block;
   margin: auto;
-  align-self: center;
-
- }
-
+  width: 100%;
+}

@@ -44,32 +44,53 @@ async function getCommentsList() {
 
 // HELPER_FUNCTIONS
 /** 
- * adds an <li> element containing @param text to the HTML Element @param list.
- * @param {String} text
+ * adds an <div> element containing @param commentObj to the HTML Element @param list.
+ * @param {Object} commentObj
  * @param {HTMLElement} list
  */
 function addToList(commentObj, list) {
-  const comment = document.createElement('li');
-  comment.innerText = commentObj.text;
-
-  const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.addEventListener('click', () => {
-    deleteCommentFromDB(commentObj);
-  });
-
-  comment.appendChild(deleteButtonElement);
-  list.prepend(comment);
+  const rowElement = createRowElement();
+  const commentElement = createCommentElement(commentObj.text);
+  rowElement.appendChild(commentElement);
+  const deleteButtonElement = createDeleteButtonElement(commentObj);
+  rowElement.appendChild(deleteButtonElement);
+  list.prepend(rowElement);
 }
 
 /** 
  * Submits the comment form when the enter key is pressed without the shift key
- * @param {Event} The onkeydown event
+ * @param {Object} commentObj from the query
+ * @return {HTMLElement} a delete button
  */
-function submitCommentOnEnter(event) {
-  if (event.keyCode == 13 && !event.shiftKey) {
-    document.getElementById(COMMENT_FORM_ID).submit();
-  }
+function createDeleteButtonElement(commentObj) {
+  let deleteButtonElement = document.createElement('div');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.className = 'delete-button col-2';
+  deleteButtonElement.addEventListener('click', () => {
+    deleteCommentFromDB(commentObj);
+  });
+  return deleteButtonElement;
+}
+
+/** 
+ * Create a row for a comment
+ */
+function createRowElement() {
+  let rowElement = document.createElement('div');
+  rowElement.className = 'row';
+  return rowElement;
+}
+
+/** 
+ * Create the container for the comment text 
+ * @param {String} text the actual text inside the comment
+ * @return {HTMLElement} the html element containing the comment text
+ */
+function createCommentElement(text) {
+  let commentElement = document.createElement('div');
+  commentElement.innerText = text;
+  commentElement.className = 'col-10 comment-text';
+  return commentElement;
 }
 
 /** Posts a comment to the server */

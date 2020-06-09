@@ -16,6 +16,7 @@
 
 <!-- Custom styles -->
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="comments.css">
 
 <body onload="getCommentsList()">
   <div id="content" class="container-md">
@@ -28,16 +29,17 @@
 
     <!-- Comments -->
     <!-- Number of comments dropdown -->
-    <label for="max-comments">Number of comments to diplay</label>
-    <select form="comment-form" id="max-comments" name="max-comments" onchange="getCommentsList()">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="20">20</option>
-    </select>
+    <div class="row">
+      <select form="comment-form" id="max-comments" name="max-comments" onchange="getCommentsList()">
+        <option value="5">Display 5 comments</option>
+        <option value="10">Display 10 comments</option>
+        <option value="20">Display 20 Comments</option>
+      </select>
+    </div>
     <div id="comment-container"></div>
-    <form id="comment-form" onsubmit="postComment(event)" action="/post-comment" method="POST">
-      <textarea name="comment-input"></textarea>
-      <input type="submit" />
+    <form id="comment-form" onsubmit="postComment(event)" placeholder="Add a comment" action="/post-comment" method="POST">
+      <div class="row"><textarea name="comment-input" rows="4"></textarea></div>
+      <div class="row"><input type="submit" /></div>
     </form>
   </div>
 
