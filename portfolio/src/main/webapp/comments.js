@@ -51,8 +51,8 @@ async function getCommentsList() {
 function addToList(commentObj, list) {
   const rowElement = createRowElement();
   const commentElement = createCommentElement(commentObj.text);
-  const deleteButtonElement = createDeleteButtonElement(commentObj)
-  rowElement.appendChild(commentElement)
+  rowElement.appendChild(commentElement);
+  const deleteButtonElement = createDeleteButtonElement(commentObj);
   rowElement.appendChild(deleteButtonElement);
   list.prepend(rowElement);
 }
