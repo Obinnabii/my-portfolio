@@ -103,8 +103,9 @@ function createCommentElement(text) {
  */
 function createPostTimeElement(postTime) {
   let postTimeElement = document.createElement('small');
+  // Insert a newline character to separate the comment from its timestamp
   let postTimeString = '\n' + new Date(postTime).toLocaleString();
-  postTimeElement.innerText = postTimeString
+  postTimeElement.innerText = postTimeString;
   return postTimeElement;
 }
 
