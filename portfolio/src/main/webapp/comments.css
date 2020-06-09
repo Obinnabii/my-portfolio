@@ -1,4 +1,10 @@
-/* DELETE */
+.comment-text {
+  word-wrap: break-word;
+  padding: 5px 5px;
+  background-color: white;
+  border: 1px solid gray;
+  color: black
+}
 
 .delete-button {
   color: rgb(200, 10, 0);
@@ -19,9 +25,6 @@
   text-decoration: none;
   border: none;
 }
-
-
-/* SELECT */
 
 select {
   width: 100%;
@@ -54,12 +57,4 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: rgb(46, 100, 48);
-}
-
-.comment-text {
-  word-wrap: break-word;
-  padding: 5px 5px;
-  background-color: white;
-  border: 1px solid gray;
-  color: black
 }
