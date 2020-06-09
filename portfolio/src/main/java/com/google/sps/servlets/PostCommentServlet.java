@@ -42,7 +42,6 @@ public class PostCommentServlet extends HttpServlet {
       text = text.trim();
       long commentPostTime = System.currentTimeMillis();
       Entity commentEntity = new Entity(Comment.ENTITY_NAME);
-      
       commentEntity.setProperty(Comment.TEXT_FIELD, text);
       commentEntity.setProperty(Comment.POST_TIME_FIELD, commentPostTime);
       
