@@ -37,9 +37,8 @@ public class PostCommentServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String text = request.getParameter("comment-input");
+    String text = request.getParameter("comment-input").trim();
     if (!text.isBlank()) { 
-      text = text.trim();
       long commentPostTime = System.currentTimeMillis();
       Entity commentEntity = new Entity(Comment.ENTITY_NAME);
       commentEntity.setProperty(Comment.TEXT_FIELD, text);
