@@ -49,12 +49,12 @@ async function getCommentsList() {
  * @param {HTMLElement} list
  */
 function addToList(commentObj, list) {
-  const rowElement = createRowElement();
   const commentElement = createCommentElement(commentObj.text);
   const postTimeElement = createPostTimeElement(commentObj.postTime)
-  const deleteButtonElement = createDeleteButtonElement(commentObj)
   commentElement.appendChild(postTimeElement);
+  const rowElement = createRowElement();
   rowElement.appendChild(commentElement)
+  const deleteButtonElement = createDeleteButtonElement(commentObj)
   rowElement.appendChild(deleteButtonElement);
   list.prepend(rowElement);
 }
