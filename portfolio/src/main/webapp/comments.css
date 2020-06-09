@@ -1,14 +1,14 @@
 .comment-text {
   word-wrap: break-word;
   padding: 5px 5px;
-  background-color: white;
+  background-color: black;
   border: 1px solid gray;
-  color: black
+  color: gainsboro;
 }
 
 .delete-button {
   color: rgb(200, 10, 0);
-  background-color: white;
+  background-color: gainsboro;
   border: 1px solid gray;
   padding: 5px 5px;
   text-decoration: none;
@@ -40,7 +40,7 @@ textarea {
   max-height: 50%;
   box-sizing: border-box;
   border: none;
-  background-color: white;
+  background-color: gainsboro;
   margin-bottom: none;
 }
 
@@ -57,4 +57,8 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: rgb(46, 100, 48);
+}
+
+small {
+  color: rgb(0, 60, 0);
 }
