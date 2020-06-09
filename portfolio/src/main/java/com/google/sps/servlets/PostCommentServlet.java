@@ -39,12 +39,13 @@ public class PostCommentServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = request.getParameter("comment-input");
     if (!text.isBlank()) { 
+      text = text.trim();
       long commentPostTime = System.currentTimeMillis();
       Entity commentEntity = new Entity(Comment.ENTITY_NAME);
-
+      
       commentEntity.setProperty(Comment.TEXT_FIELD, text);
       commentEntity.setProperty(Comment.POST_TIME_FIELD, commentPostTime);
-
+      
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
     }

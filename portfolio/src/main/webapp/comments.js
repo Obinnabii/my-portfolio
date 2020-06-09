@@ -93,7 +93,6 @@ function createCommentElement(text) {
   let commentElement = document.createElement('div');
   commentElement.innerText = text;
   commentElement.className = 'col-10 comment-text';
-  commentElement.appendChild(postTimeElement)
   return commentElement;
 }
 
@@ -104,7 +103,7 @@ function createCommentElement(text) {
  */
 function createPostTimeElement(postTime) {
   let postTimeElement = document.createElement('small');
-  let postTimeString = ' ' + new Date(postTime).toLocaleString();
+  let postTimeString = '\n' + new Date(postTime).toLocaleString();
   postTimeElement.innerText = postTimeString
   return postTimeElement;
 }
