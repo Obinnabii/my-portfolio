@@ -64,14 +64,6 @@ small {
   color: rgb(0, 60, 0);
 }
 
-.hide {
-  visibility: hidden;
-}
-
-.uhide {
-  visibility: visible;
-}
-
 #auth-button {
   border: none;
   color: white;
