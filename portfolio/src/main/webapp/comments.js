@@ -29,16 +29,23 @@ const COMMENT_SECTION_ID = 'comment-section';
  * The names of the classes I will use
  * @type {String}
  */
-const HIDDEN_LOGOUT_BUTTON_CLASS = 'btn hide'
-const VISIBLE_LOGOUT_BUTTON_CLASS = 'btn logout unhide'
-const HIDDEN_LOGIN_BUTTON_CLASS = 'btn hide'
-const VISIBLE_LOGIN_BUTTON_CLASS = 'btn login unhide'
+const LOGOUT_BUTTON_CLASS = 'btn logout'
+const LOGIN_BUTTON_CLASS = 'btn login'
+
+// START_UP_FUNCTION
+/**
+ * Set up the comments.html page
+ */
+function setUpCommentsPage() {
+  getCommentsList();
+  getUserLoginStatus();
+}
 
 // SERVER_FUNCTIONS
 /**
  * Get a list of comments from the servlet.
  */
-async function getCommentsList() {
+function getCommentsList() {
 
   let maxCommentsSelector = document.getElementById(MAX_COMMENTS_ID);
   let maxComments = maxCommentsSelector
@@ -55,6 +62,42 @@ async function getCommentsList() {
     })
   });
 }
+
+/** 
+ * Posts a comment to the servlet 
+ * @param {Event} commentSubmissionEvent  
+ */
+function postComment(commentSubmissionEvent) {
+  // Avoid redirection
+  commentSubmissionEvent.preventDefault();
+  const params = new URLSearchParams(new FormData(document.getElementById(COMMENT_FORM_ID)))
+  fetch('/post-comment', { method: 'POST', body: params })
+    .then(resp => getCommentsList());
+}
+
+/** 
+ * Tells the servlet to delete the comment marked by @param commentObj and refreshes the page 
+ * @param {Object} commentObj 
+ */
+function deleteCommentFromDB(commentObj) {
+  const params = new URLSearchParams();
+  params.append('id', commentObj.id);
+  fetch('/delete-comment', { method: 'POST', body: params })
+    .then(resp => getCommentsList());
+}
+
+/**
+ * fetch the login status from the servlet. 
+ * If the user is logged in, unhide the comment section.
+ * If the user is not logged in, display a login link.
+ */
+function getUserLoginStatus() {
+  fetch('/login').then(response => response.json()).then((userInfo) => {
+    setAuthenticationButton(userInfo);
+    showCommentSection(userInfo.isLoggedIn);
+  });
+}
+
 
 // HELPER_FUNCTIONS
 /** 
@@ -123,65 +166,36 @@ function createPostTimeElement(postTime) {
   return postTimeElement;
 }
 
-/** 
- * Posts a comment to the servlet 
- * @param {Event} commentSubmissionEvent  
- */
-function postComment(commentSubmissionEvent) {
-  // Avoid redirection
-  commentSubmissionEvent.preventDefault();
-  const params = new URLSearchParams(new FormData(document.getElementById(COMMENT_FORM_ID)))
-  fetch('/post-comment', { method: 'POST', body: params })
-    .then(resp => getCommentsList());
-}
-
-/** 
- * Tells the servlet to delete the comment marked by @param commentObj and refreshes the page 
- * @param {Object} commentObj 
- */
-function deleteCommentFromDB(commentObj) {
-  const params = new URLSearchParams();
-  params.append('id', commentObj.id);
-  fetch('/delete-comment', { method: 'POST', body: params })
-    .then(resp => getCommentsList());
-}
-
-/**
- * fetch the login status from the servlet. 
- * If the user is logged in, unhide the comment section.
- * If the user is not logged in, display a login link.
- */
-function getUserLoginStatus() {
-  fetch('/login').then(response => response.json()).then((userInfo) => {
-    console.log(userInfo);
-    if (userInfo.isLoggedIn) {
-      document.getElementById(AUTHENTICATION_BUTTON_ID).className = HIDDEN_CLASS;
-      document.getElementById(COMMENT_SECTION_ID).removeAttribute("hidden")
-    } else {
-      document.getElementById(COMMENT_SECTION_ID).hidden;
-      loginButtonElement = document.getElementById(AUTHENTICATION_BUTTON_ID);
-      loginButtonElement.className = "btn " + VISIBLE_CLASS;
-      loginButtonElement.href = userInfo.authenticationURL;
-    }
-  });
-}
 
 /**
  * Sets whether authentication button is a login or logout 
  * @param {Object} userInfo is the parsed user authentication information
  */
 function setAuthenticationButton(userInfo) {
-  let authenticationButtonElement = document.createElement('a');
-  buttonElement.id = AUTHENTICATION_BUTTON_ID;
+  let authenticationButtonElement = document.getElementById(AUTHENTICATION_BUTTON_ID);
   if (userInfo.isLoggedIn) {
-
+    authenticationButtonElement.innerText = "logout";
+    authenticationButtonElement.className = LOGOUT_BUTTON_CLASS;
+  } else {
+    authenticationButtonElement.innerText = "login";
+    authenticationButtonElement.className = LOGIN_BUTTON_CLASS;
   }
+  authenticationButtonElement.href = userInfo.authenticationURL;
 }
 
 /**
- * Remove authentication button
+ * If the user is logged in, unhide the comment section.
+ * If the user is not logged in, hoide the comment section.
+ * @param {boolean} userIsLoggedin
  */
-function removeAuthenticationButton() {
-  let buttonElement = document.getElementById(AUTHENTICATION_BUTTON_ID)
-  buttonElement.remove()
+function showCommentSection(userIsLoggedin) {
+  let commentSection = document.getElementById(COMMENT_SECTION_ID);
+  if (userIsLoggedin) {
+    commentSection.removeAttribute("hidden");
+  } else {
+    commentSection.hidden;
+  }
 }
+
+// FUNCTION_CALLS
+setUpCommentsPage();
