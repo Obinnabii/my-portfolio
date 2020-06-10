@@ -49,7 +49,7 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
-          <deploy.projectId>step2020-277817</deploy.projectId>
+          <deploy.projectId>step2020-279820</deploy.projectId>
           <deploy.version>2</deploy.version>
         </configuration>
       </plugin>
