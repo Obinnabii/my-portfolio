@@ -26,10 +26,12 @@
         <nav id="my-nav"></nav>
       </div>
     </header>
-    <a id="login-button" onload="getUserLoginStatus()">login</a>
+    <div class="row">
+      <a id="auth-button" onload="getUserLoginStatus()">login</a>
+    </div>
     <!-- Comments -->
     <!-- Number of comments dropdown -->
-    <span class="hide" id="comment-section">
+    <span id="comment-section" hidden>
       <div class="row">
         <select form="comment-form" id="max-comments" name="max-comments" onchange="getCommentsList()">
           <option value="5">Display 5 comments</option>

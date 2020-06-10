@@ -17,7 +17,7 @@
  * The id of the div where comments will be placed
  * @type {String}
  */
-const LOGIN_BUTTON_ID = 'login-button';
+const AUTHENTICATION_BUTTON_ID = 'auth-button';
 const COMMENTS_ID = 'comment-container';
 const COMMENT_FORM_ID = 'comment-form';
 const MAX_COMMENTS_ID = 'max-comments';
@@ -29,8 +29,10 @@ const COMMENT_SECTION_ID = 'comment-section';
  * The names of the classes I will use
  * @type {String}
  */
-const HIDDEN_BUTTON_CLASS = 'btn hide'
-const VISIBLE_BUTTON_CLASS = 'btn unhide'
+const HIDDEN_LOGOUT_BUTTON_CLASS = 'btn hide'
+const VISIBLE_LOGOUT_BUTTON_CLASS = 'btn logout unhide'
+const HIDDEN_LOGIN_BUTTON_CLASS = 'btn hide'
+const VISIBLE_LOGIN_BUTTON_CLASS = 'btn login unhide'
 
 // SERVER_FUNCTIONS
 /**
@@ -153,13 +155,33 @@ function getUserLoginStatus() {
   fetch('/login').then(response => response.json()).then((userInfo) => {
     console.log(userInfo);
     if (userInfo.isLoggedIn) {
-      document.getElementById(LOGIN_BUTTON_ID).className = HIDDEN_CLASS;
-      document.getElementById(COMMENT_SECTION_ID).className = VISIBLE_CLASS;
+      document.getElementById(AUTHENTICATION_BUTTON_ID).className = HIDDEN_CLASS;
+      document.getElementById(COMMENT_SECTION_ID).removeAttribute("hidden")
     } else {
-      document.getElementById(COMMENT_SECTION_ID).className = HIDDEN_CLASS;
-      loginButtonElement = document.getElementById(LOGIN_BUTTON_ID);
+      document.getElementById(COMMENT_SECTION_ID).hidden;
+      loginButtonElement = document.getElementById(AUTHENTICATION_BUTTON_ID);
       loginButtonElement.className = "btn " + VISIBLE_CLASS;
       loginButtonElement.href = userInfo.authenticationURL;
     }
   });
+}
+
+/**
+ * Sets whether authentication button is a login or logout 
+ * @param {Object} userInfo is the parsed user authentication information
+ */
+function setAuthenticationButton(userInfo) {
+  let authenticationButtonElement = document.createElement('a');
+  buttonElement.id = AUTHENTICATION_BUTTON_ID;
+  if (userInfo.isLoggedIn) {
+
+  }
+}
+
+/**
+ * Remove authentication button
+ */
+function removeAuthenticationButton() {
+  let buttonElement = document.getElementById(AUTHENTICATION_BUTTON_ID)
+  buttonElement.remove()
 }
