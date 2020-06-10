@@ -31,7 +31,7 @@
         <version>2.8.6</version>
     </dependency>
 
-    <!--this project will use Datastore -->
+    <!--this project will use Datastore and Users API -->
     <dependency>
       <groupId>com.google.appengine</groupId>
       <artifactId>appengine-api-1.0-sdk</artifactId>
