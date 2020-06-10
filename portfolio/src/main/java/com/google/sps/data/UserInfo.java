@@ -19,11 +19,11 @@ public final class UserInfo {
 
   private final String email;
   private final String authenticationURL;
-  private final boolean loggedIn;
+  private final boolean isLoggedIn;
 
-  public UserInfo(String email, String authenticationURL, boolean loggedIn) {
+  public UserInfo(String email, String authenticationURL, boolean isLoggedIn) {
     this.email = email;
     this.authenticationURL = authenticationURL;
-    this.loggedIn = loggedIn;
+    this.isLoggedIn = isLoggedIn;
   }
 }
