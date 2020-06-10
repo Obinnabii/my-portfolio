@@ -12,27 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// DIV_IDs
+// IDs
 /** 
  * The id of the div where comments will be placed
  * @type {String}
  */
-const COMMENTS_ID = "comment-container";
-const COMMENT_FORM_ID = "comment-form";
-const MAX_COMMENTS_ID = "max-comments";
+const LOGIN_BUTTON_ID = 'login-button';
+const COMMENTS_ID = 'comment-container';
+const COMMENT_FORM_ID = 'comment-form';
+const MAX_COMMENTS_ID = 'max-comments';
 // Spans all the parts of the comment section
-const COMMENT_SECTION_ID = "comment-section";
+const COMMENT_SECTION_ID = 'comment-section';
+
+// CLASS_NAMEs
+/** 
+ * The names of the classes I will use
+ * @type {String}
+ */
+const HIDDEN_BUTTON_CLASS = 'btn hide'
+const VISIBLE_BUTTON_CLASS = 'btn unhide'
 
 // SERVER_FUNCTIONS
 /**
  * Get a list of comments from the servlet.
  */
 async function getCommentsList() {
+
   let maxCommentsSelector = document.getElementById(MAX_COMMENTS_ID);
   let maxComments = maxCommentsSelector
     .options[maxCommentsSelector.selectedIndex]
     .value;
-
+  getUserLoginStatus();
   let commentsUrl = '/get-comments?maxComments=' + maxComments;
 
   fetch(commentsUrl).then(response => response.json()).then((comments) => {
@@ -132,4 +142,24 @@ function deleteCommentFromDB(commentObj) {
   params.append('id', commentObj.id);
   fetch('/delete-comment', { method: 'POST', body: params })
     .then(resp => getCommentsList());
+}
+
+/**
+ * fetch the login status from the servlet. 
+ * If the user is logged in, unhide the comment section.
+ * If the user is not logged in, display a login link.
+ */
+function getUserLoginStatus() {
+  fetch('/login').then(response => response.json()).then((userInfo) => {
+    console.log(userInfo);
+    if (userInfo.isLoggedIn) {
+      document.getElementById(LOGIN_BUTTON_ID).className = HIDDEN_CLASS;
+      document.getElementById(COMMENT_SECTION_ID).className = VISIBLE_CLASS;
+    } else {
+      document.getElementById(COMMENT_SECTION_ID).className = HIDDEN_CLASS;
+      loginButtonElement = document.getElementById(LOGIN_BUTTON_ID);
+      loginButtonElement.className = "btn " + VISIBLE_CLASS;
+      loginButtonElement.href = userInfo.authenticationURL;
+    }
+  });
 }
