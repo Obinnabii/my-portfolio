@@ -44,6 +44,5 @@ const navBarHTML =
   </a>	
   `;
 
-// FUNCTION_CALL 
-// Add nav bar to page
+// Add nav bar to each page. This lets us reuse the navBarHTML across all 4 pages
 document.getElementById(NAV_ID).innerHTML = navBarHTML;
