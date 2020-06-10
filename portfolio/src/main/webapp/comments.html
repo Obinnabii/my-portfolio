@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="comments.css">
 
-<body onload="getCommentsList()">
+<body onload="setUpCommentPage()">
   <div id="content" class="container-md">
     <header>
       <!-- Navigation bar at the top -->
@@ -26,9 +26,6 @@
         <nav id="my-nav"></nav>
       </div>
     </header>
-    <div class="row">
-      <a id="auth-button" onload="getUserLoginStatus()">login</a>
-    </div>
     <!-- Comments -->
     <!-- Number of comments dropdown -->
     <span id="comment-section" hidden>
@@ -45,6 +42,9 @@
         <div class="row"><input type="submit" /></div>
       </form>
     </span>
+    <div class="row">
+      <a id="auth-button">loading...</a>
+    </div>
   </div>
 
   <!-- SCRIPTS  -->
