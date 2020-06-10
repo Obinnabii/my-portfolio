@@ -185,7 +185,7 @@ function setAuthenticationButton(userInfo) {
 
 /**
  * If the user is logged in, unhide the comment section.
- * If the user is not logged in, hoide the comment section.
+ * If the user is not logged in, hide the comment section.
  * @param {boolean} userIsLoggedin
  */
 function showCommentSection(userIsLoggedin) {
