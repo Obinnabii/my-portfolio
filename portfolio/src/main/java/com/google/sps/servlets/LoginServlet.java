@@ -33,11 +33,11 @@ public class LoginServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
       String userEmail = userService.getCurrentUser().getEmail();
-      String urlToRedirectToAfterUserLogsOut = "/login";
+      String urlToRedirectToAfterUserLogsOut = "/comments.html";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
       currentUser = new UserInfo(userEmail, logoutUrl, true);
     } else {
-      String urlToRedirectToAfterUserLogsIn = "/login";
+      String urlToRedirectToAfterUserLogsIn = "/comments.html";
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
       currentUser = new UserInfo("guest", loginUrl, false);
     }
