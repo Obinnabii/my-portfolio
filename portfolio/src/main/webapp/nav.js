@@ -16,79 +16,33 @@
 // DIV_IDs
 
 /** 
-* The id of the div where the nav bar will be added.
-* @const {String}
-*/
+ * The id of the div where the nav bar will be added.
+ * @const {String}
+ */
 const NAV_ID = "my-nav";
 
 /** 
-* list containing JS objects with link information. link fields correspond to anchor fields
-* @const {Object List}
-*/
-const LINKS = [
-    {
-      target:"_blank", 
-      href:"mailto: coa22@cornell.edu",
-      class:"nav_bar", 
-      text:"/email_me "
-    },
-    {
-      target:"_blank", 
-      href:"https://github.com/Obinnabii",
-      class:"nav_bar", 
-      text:"/see_github "
-    },
-    {
-      target:"_blank", 
-      href:"https://drive.google.com/file/d/1tc2YaWmPzVhdCSb3Gv6VVz-599Qa5CrT/view?usp=sharing",
-      class:"nav_bar", 
-      text:"/see_resume "
-    },
-    {
-      target:"_self", 
-      href:"index.html",
-      class:"nav_bar", 
-      text:"/home_page "
-    },
-    {
-      target:"_self", 
-      href:"comments.html",
-      class:"nav_bar", 
-      text:"/comments"
-    }
-  ];
+ * Nav-bar anchors in HTML
+ * @const {String}
+ */
+const navBarHTML =
+  `
+  <a target="_blank" href="mailto: coa22@cornell.edu" class="nav_bar">
+    /email_me
+  </a>	
+  <a target="_blank" href="https://github.com/Obinnabii" class="nav_bar">
+    /see_github
+  </a>	
+  <a target="_blank" href="https://drive.google.com/file/d/1tc2YaWmPzVhdCSb3Gv6VVz-599Qa5CrT/view?usp=sharing" class="nav_bar ">
+    /see_resume
+  </a>	
+  <a target="_self" href="index.html" class="nav_bar">
+    /welcome_page
+  </a>	
+  <a target="_self" href="comments.html" class="nav_bar">
+    /comments
+  </a>	
+  `;
 
-
-// HELPER_FUNCTIONS
-
-/**
-* Create an anchor <a> from a given JS object
-* @param {Object} link Js object with required fields. look at LINKS for more details
-* @return {HTMLElement} anchor object
-*/
-function anchorfy(link) {
-  const a = document.createElement('a');
-  a.innerText = link.text;
-  a.class = link.class;
-  a.href = link.href;
-  a.target = link.target;
-  return a;
-}
-
-// FUNCTION 
-
-/**
-* Add nav bar to page
-*/
-function createNavBar() {
-  let navBar = document.getElementById(NAV_ID);         
-  for (i = 0; i < LINKS.length; i++) {            
-    console.log(LINKS[i]);
-    let a = anchorfy(LINKS[i]);
-    navBar.appendChild(a);
-  }
-}
-
-
-// FUNCTION_CALL
-createNavBar();
+// Add nav bar to each page. This lets us reuse the navBarHTML across all 4 pages
+document.getElementById(NAV_ID).innerHTML = navBarHTML;
