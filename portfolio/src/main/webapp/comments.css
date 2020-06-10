@@ -44,9 +44,11 @@ textarea {
   width: 100%;
 }
 
-input[type=submit] {
+input[type=submit],
+#login-button {
   background-color: rgb(39, 77, 40);
   border: none;
+  border-radius: 2px;
   color: white;
   cursor: pointer;
   margin: none;
@@ -55,7 +57,8 @@ input[type=submit] {
   width: 100%;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover,
+#login-button {
   background-color: rgb(46, 100, 48);
 }
 
