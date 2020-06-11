@@ -23,6 +23,7 @@ public final class Comment {
   public static String ENTITY_NAME = "Comment";
   public static String POST_TIME_FIELD = "postTime";
   public static String TEXT_FIELD = "text";  
+  public static String USER_EMAIL_FIELD = "userEmail";
 
   public Comment(long id, String text, long postTime) {
     this.id = id;

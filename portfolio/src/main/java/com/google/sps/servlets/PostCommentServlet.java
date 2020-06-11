@@ -14,6 +14,8 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -39,12 +41,25 @@ public class PostCommentServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = request.getParameter("comment-input").trim();
     if (!text.isBlank()) { 
-      long commentPostTime = System.currentTimeMillis();
       Entity commentEntity = new Entity(Comment.ENTITY_NAME);
       commentEntity.setProperty(Comment.TEXT_FIELD, text);
+      long commentPostTime = System.currentTimeMillis();
       commentEntity.setProperty(Comment.POST_TIME_FIELD, commentPostTime);
+      String commentUserEmail = getUserEmail();
+      commentEntity.setProperty(Comment.USER_EMAIL_FEILD, commentUserEmail);
+      
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
+    }
+  }
+
+  /** Returns the current user's email */
+  private String getUserEmail() {
+    UserService userService = UserServiceFactory.getUserService();
+    if (userService.isUserLoggedIn()) {
+      return userService.getCurrentUser().getEmail();
+    } else {
+      return "guest";
     }
   }
 }
