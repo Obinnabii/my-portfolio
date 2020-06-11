@@ -38,11 +38,11 @@ public class DeleteCommentServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     boolean deleteAll = Boolean.parseBoolean(request.getParameter("deleteAll"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    if(!deleteAll){
+    if (!deleteAll) {
       long commentId = Long.parseLong(request.getParameter("id"));
       Key commentEntityKey = KeyFactory.createKey(Comment.ENTITY_NAME, commentId);
       datastore.delete(commentEntityKey);
-    }else{
+    } else {
       Query query = new Query(Comment.ENTITY_NAME).setKeysOnly();
       PreparedQuery queryResults = datastore.prepare(query);
       for (Entity commentEntity : queryResults.asIterable()) {
