@@ -76,12 +76,17 @@ function postComment(commentSubmissionEvent) {
 }
 
 /** 
- * Tells the servlet to delete the comment marked by @param commentObj and refreshes the page 
+ * Tells the servlet to delete the comment marked by @param commentObj or all comments if deleteAll is specified 
+ * and refreshes the page 
  * @param {Object} commentObj 
+ * @
  */
-function deleteCommentFromDB(commentObj) {
+function deleteCommentFromDB(commentObj, deleteAll = false) {
   const params = new URLSearchParams();
-  params.append('id', commentObj.id);
+  params.append('deleteAll', deleteAll);
+  if (!deleteAll) {
+    params.append('id', commentObj.id);
+  }
   fetch('/delete-comment', { method: 'POST', body: params })
     .then(resp => getCommentsList());
 }
