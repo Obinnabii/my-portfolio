@@ -98,8 +98,8 @@ small {
 }
 
 .user-email {
+  color: rgb(0, 130, 0);
   font-weight: bold;
-  color: rgb(0, 130, 0)
 }
 
 .email-comment-separator {
