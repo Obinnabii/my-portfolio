@@ -46,7 +46,7 @@ public class PostCommentServlet extends HttpServlet {
       long commentPostTime = System.currentTimeMillis();
       commentEntity.setProperty(Comment.POST_TIME_FIELD, commentPostTime);
       String commentUserEmail = getUserEmail();
-      commentEntity.setProperty(Comment.USER_EMAIL_FEILD, commentUserEmail);
+      commentEntity.setProperty(Comment.USER_EMAIL_FIELD, commentUserEmail);
       
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
