@@ -55,6 +55,7 @@ input[type=submit],
   padding: 5px 5px;
   text-align: center;
   text-decoration: none;
+  text-align: center;
   width: 100%;
 }
 
@@ -76,6 +77,7 @@ small {
   padding: 5px 5px;
   text-align: center;
   text-decoration: none;
+  text-align: center;
   width: 100%;
 }
 
