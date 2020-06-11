@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="comments.css">
 
-<body onload="getCommentsList()">
+<body onload="setUpCommentsPage()">
   <div id="content" class="container-md">
     <header>
       <!-- Navigation bar at the top -->
@@ -26,21 +26,25 @@
         <nav id="my-nav"></nav>
       </div>
     </header>
-
     <!-- Comments -->
     <!-- Number of comments dropdown -->
+    <span id="comment-section" hidden>
+      <div class="row">
+        <select form="comment-form" id="max-comments" name="max-comments" onchange="getCommentsList()">
+          <option value="5">Display 5 comments</option>
+          <option value="10">Display 10 comments</option>
+          <option value="20">Display 20 Comments</option>
+        </select>
+      </div>
+      <div id="comment-container"></div>
+      <form id="comment-form" onsubmit="postComment(event)" placeholder="Add a comment" action="/post-comment" method="POST">
+        <div class="row"><textarea name="comment-input" rows="4"></textarea></div>
+        <div class="row"><input type="submit" /></div>
+      </form>
+    </span>
     <div class="row">
-      <select form="comment-form" id="max-comments" name="max-comments" onchange="getCommentsList()">
-        <option value="5">Display 5 comments</option>
-        <option value="10">Display 10 comments</option>
-        <option value="20">Display 20 Comments</option>
-      </select>
+      <a id="auth-button">loading...</a>
     </div>
-    <div id="comment-container"></div>
-    <form id="comment-form" onsubmit="postComment(event)" placeholder="Add a comment" action="/post-comment" method="POST">
-      <div class="row"><textarea name="comment-input" rows="4"></textarea></div>
-      <div class="row"><input type="submit" /></div>
-    </form>
   </div>
 
   <!-- SCRIPTS  -->

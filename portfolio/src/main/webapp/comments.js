@@ -12,25 +12,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// DIV_IDs
+// IDs
 /** 
  * The id of the div where comments will be placed
  * @type {String}
  */
-const COMMENTS_ID = "comment-container";
-const COMMENT_FORM_ID = "comment-form";
-const MAX_COMMENTS_ID = "max-comments";
+const AUTHENTICATION_BUTTON_ID = 'auth-button';
+const COMMENTS_ID = 'comment-container';
+const COMMENT_FORM_ID = 'comment-form';
+const MAX_COMMENTS_ID = 'max-comments';
+// Spans all the parts of the comment section
+const COMMENT_SECTION_ID = 'comment-section';
+
+// CLASS_NAMEs
+/** 
+ * The names of the classes I will use
+ * @type {String}
+ */
+const LOGOUT_BUTTON_CLASS = 'btn logout'
+const LOGIN_BUTTON_CLASS = 'btn login'
+
+// START_UP_FUNCTION
+/**
+ * Set up the comments.html page
+ */
+function setUpCommentsPage() {
+  getCommentsList();
+  getUserLoginStatus();
+}
 
 // SERVER_FUNCTIONS
 /**
  * Get a list of comments from the servlet.
  */
-async function getCommentsList() {
+function getCommentsList() {
+
   let maxCommentsSelector = document.getElementById(MAX_COMMENTS_ID);
   let maxComments = maxCommentsSelector
     .options[maxCommentsSelector.selectedIndex]
     .value;
-
+  getUserLoginStatus();
   let commentsUrl = '/get-comments?maxComments=' + maxComments;
 
   fetch(commentsUrl).then(response => response.json()).then((comments) => {
@@ -41,6 +62,42 @@ async function getCommentsList() {
     })
   });
 }
+
+/** 
+ * Posts a comment to the servlet 
+ * @param {Event} commentSubmissionEvent  
+ */
+function postComment(commentSubmissionEvent) {
+  // Avoid redirection
+  commentSubmissionEvent.preventDefault();
+  const params = new URLSearchParams(new FormData(document.getElementById(COMMENT_FORM_ID)))
+  fetch('/post-comment', { method: 'POST', body: params })
+    .then(resp => getCommentsList());
+}
+
+/** 
+ * Tells the servlet to delete the comment marked by @param commentObj and refreshes the page 
+ * @param {Object} commentObj 
+ */
+function deleteCommentFromDB(commentObj) {
+  const params = new URLSearchParams();
+  params.append('id', commentObj.id);
+  fetch('/delete-comment', { method: 'POST', body: params })
+    .then(resp => getCommentsList());
+}
+
+/**
+ * fetch the login status from the servlet. 
+ * If the user is logged in, unhide the comment section.
+ * If the user is not logged in, display a login link.
+ */
+function getUserLoginStatus() {
+  fetch('/login').then(response => response.json()).then((userInfo) => {
+    setAuthenticationButton(userInfo);
+    showCommentSection(userInfo.isLoggedIn);
+  });
+}
+
 
 // HELPER_FUNCTIONS
 /** 
@@ -109,25 +166,33 @@ function createPostTimeElement(postTime) {
   return postTimeElement;
 }
 
-/** 
- * Posts a comment to the servlet 
- * @param {Event} commentSubmissionEvent  
+
+/**
+ * Sets whether authentication button is a login or logout 
+ * @param {Object} userInfo is the parsed user authentication information
  */
-function postComment(commentSubmissionEvent) {
-  // Avoid redirection
-  commentSubmissionEvent.preventDefault();
-  const params = new URLSearchParams(new FormData(document.getElementById(COMMENT_FORM_ID)))
-  fetch('/post-comment', { method: 'POST', body: params })
-    .then(resp => getCommentsList());
+function setAuthenticationButton(userInfo) {
+  let authenticationButtonElement = document.getElementById(AUTHENTICATION_BUTTON_ID);
+  if (userInfo.isLoggedIn) {
+    authenticationButtonElement.innerText = "logout";
+    authenticationButtonElement.className = LOGOUT_BUTTON_CLASS;
+  } else {
+    authenticationButtonElement.innerText = "login";
+    authenticationButtonElement.className = LOGIN_BUTTON_CLASS;
+  }
+  authenticationButtonElement.href = userInfo.authenticationURL;
 }
 
-/** 
- * Tells the servlet to delete the comment marked by @param commentObj and refreshes the page 
- * @param {Object} commentObj 
+/**
+ * If the user is logged in, unhide the comment section.
+ * If the user is not logged in, hide the comment section.
+ * @param {boolean} userIsLoggedin
  */
-function deleteCommentFromDB(commentObj) {
-  const params = new URLSearchParams();
-  params.append('id', commentObj.id);
-  fetch('/delete-comment', { method: 'POST', body: params })
-    .then(resp => getCommentsList());
+function showCommentSection(userIsLoggedin) {
+  let commentSection = document.getElementById(COMMENT_SECTION_ID);
+  if (userIsLoggedin) {
+    commentSection.removeAttribute("hidden");
+  } else {
+    commentSection.hidden;
+  }
 }

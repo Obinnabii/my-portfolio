@@ -47,6 +47,7 @@ textarea {
 input[type=submit] {
   background-color: rgb(39, 77, 40);
   border: none;
+  border-radius: 2px;
   color: white;
   cursor: pointer;
   margin: none;
@@ -61,4 +62,30 @@ input[type=submit]:hover {
 
 small {
   color: rgb(0, 60, 0);
+}
+
+#auth-button {
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: none;
+  padding: 5px 5px;
+  text-decoration: none;
+  width: 100%;
+}
+
+#auth-button.login {
+  background-color: rgb(39, 100, 40);
+}
+
+#auth-button.login:hover {
+  background-color: rgb(46, 100, 48);
+}
+
+#auth-button.logout {
+  background-color: rgb(133, 34, 28);
+}
+
+#auth-button.logout:hover {
+  background-color: rgb(146, 7, 0);
 }

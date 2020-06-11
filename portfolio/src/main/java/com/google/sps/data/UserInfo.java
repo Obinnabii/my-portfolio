@@ -14,19 +14,16 @@
 
 package com.google.sps.data;
 
-public final class Comment {
+/** Information on website users. */
+public final class UserInfo {
 
-  private final long id;
-  private final String text;
-  private final long postTime;
-  // Constants
-  public static String ENTITY_NAME = "Comment";
-  public static String POST_TIME_FIELD = "postTime";
-  public static String TEXT_FIELD = "text";  
+  private final String email;
+  private final String authenticationURL;
+  private final boolean isLoggedIn;
 
-  public Comment(long id, String text, long postTime) {
-    this.id = id;
-    this.text = text;
-    this.postTime = postTime;
+  public UserInfo(String email, String authenticationURL, boolean isLoggedIn) {
+    this.email = email;
+    this.authenticationURL = authenticationURL;
+    this.isLoggedIn = isLoggedIn;
   }
 }
