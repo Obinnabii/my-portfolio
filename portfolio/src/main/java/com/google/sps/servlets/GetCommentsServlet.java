@@ -51,8 +51,9 @@ public class GetCommentsServlet extends HttpServlet {
       long id = commentEntity.getKey().getId();
       String text = (String) commentEntity.getProperty(Comment.TEXT_FIELD);
       long postTime = (long) commentEntity.getProperty(Comment.POST_TIME_FIELD);
+      String userEmail = (String) commentEntity.getProperty(Comment.USER_EMAIL_FIELD);
 
-      Comment comment = new Comment(id, text, postTime);
+      Comment comment = new Comment(id, text, postTime, userEmail);
       commentList.add(comment);
     }
     Gson gson = new Gson();

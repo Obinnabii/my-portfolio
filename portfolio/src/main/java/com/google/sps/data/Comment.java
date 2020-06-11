@@ -17,16 +17,20 @@ package com.google.sps.data;
 public final class Comment {
 
   private final long id;
-  private final String text;
   private final long postTime;
+  private final String text;
+  private final String userEmail;
+
   // Constants
   public static String ENTITY_NAME = "Comment";
   public static String POST_TIME_FIELD = "postTime";
   public static String TEXT_FIELD = "text";  
+  public static String USER_EMAIL_FIELD = "userEmail";
 
-  public Comment(long id, String text, long postTime) {
+  public Comment(long id, String text, long postTime, String userEmail) {
     this.id = id;
     this.text = text;
     this.postTime = postTime;
+    this.userEmail = userEmail;
   }
 }

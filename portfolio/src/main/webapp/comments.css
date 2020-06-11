@@ -89,3 +89,12 @@ small {
 #auth-button.logout:hover {
   background-color: rgb(146, 7, 0);
 }
+
+.user-email {
+  color: rgb(0, 130, 0);
+  font-weight: bold;
+}
+
+.email-comment-separator {
+  color: rgb(0, 140, 160)
+}
