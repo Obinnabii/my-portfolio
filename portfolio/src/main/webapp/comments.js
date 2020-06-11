@@ -117,12 +117,14 @@ function getUserLoginStatus() {
  * @param {HTMLElement} list
  */
 function addToList(commentObj, list) {
-  const commentElement = createCommentElement(commentObj.text);
-  const postTimeElement = createPostTimeElement(commentObj.postTime)
+  let commentElement = createCommentElement(commentObj.text);
+  let userEmailElement = createUserEmailElement(commentObj.userEmail);
+  commentElement.prepend(userEmailElement);
+  let postTimeElement = createPostTimeElement(commentObj.postTime)
   commentElement.appendChild(postTimeElement);
-  const rowElement = createRowElement();
+  let rowElement = createRowElement();
   rowElement.appendChild(commentElement)
-  const deleteButtonElement = createDeleteButtonElement(commentObj)
+  let deleteButtonElement = createDeleteButtonElement(commentObj)
   rowElement.appendChild(deleteButtonElement);
   list.prepend(rowElement);
 }
@@ -160,7 +162,7 @@ function createRowElement() {
 function createCommentElement(text) {
   let commentElement = document.createElement('div');
   commentElement.innerText = text;
-  commentElement.className = 'col-10 comment-text';
+  commentElement.className = 'col comment-text';
   return commentElement;
 }
 
@@ -177,6 +179,22 @@ function createPostTimeElement(postTime) {
   return postTimeElement;
 }
 
+/** 
+ * Create the container for the user email for the comment section
+ * @param {String} userEmail the email of the user that posted the comment
+ * @return {HTMLElement} the html element containing @param userEmail;
+ */
+function createUserEmailElement(userEmail) {
+  console.log(userEmail);
+  let userEmailElement = document.createElement('span');
+  userEmailElement.innerText = userEmail;
+  userEmailElement.className = 'user-email';
+  let emailCommentSeparator = document.createElement('span');
+  emailCommentSeparator.innerText = ':~ ';
+  emailCommentSeparator.className = 'email-comment-separator';
+  userEmailElement.appendChild(emailCommentSeparator);
+  return userEmailElement;
+}
 
 /**
  * Sets whether authentication button is a login or logout 
