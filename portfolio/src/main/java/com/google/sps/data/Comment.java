@@ -19,7 +19,7 @@ public final class Comment {
   private final long id;
   private final long postTime;
   private final String text;
-  private final String  userEmail;
+  private final String userEmail;
 
   // Constants
   public static String ENTITY_NAME = "Comment";
