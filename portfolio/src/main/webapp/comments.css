@@ -44,7 +44,8 @@ textarea {
   width: 100%;
 }
 
-input[type=submit] {
+input[type=submit],
+#refresh {
   background-color: rgb(39, 77, 40);
   border: none;
   border-radius: 2px;
@@ -52,11 +53,14 @@ input[type=submit] {
   cursor: pointer;
   margin: none;
   padding: 5px 5px;
+  text-align: center;
   text-decoration: none;
+  text-align: center;
   width: 100%;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover,
+#refresh:hover {
   background-color: rgb(46, 100, 48);
 }
 
@@ -64,13 +68,16 @@ small {
   color: rgb(0, 60, 0);
 }
 
-#auth-button {
+#auth-button,
+#delete-all {
   border: none;
   color: white;
   cursor: pointer;
   margin: none;
   padding: 5px 5px;
+  text-align: center;
   text-decoration: none;
+  text-align: center;
   width: 100%;
 }
 
@@ -82,11 +89,13 @@ small {
   background-color: rgb(46, 100, 48);
 }
 
-#auth-button.logout {
+#auth-button.logout,
+#delete-all {
   background-color: rgb(133, 34, 28);
 }
 
-#auth-button.logout:hover {
+#auth-button.logout:hover,
+#delete-all:hover {
   background-color: rgb(146, 7, 0);
 }
 
@@ -96,5 +105,5 @@ small {
 }
 
 .email-comment-separator {
-  color: rgb(0, 140, 160)
+  color: rgb(0, 140, 160);
 }

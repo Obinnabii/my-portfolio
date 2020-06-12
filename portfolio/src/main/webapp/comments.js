@@ -86,6 +86,17 @@ function deleteCommentFromDB(commentObj) {
     .then(resp => getCommentsList());
 }
 
+/** 
+ * Tells the servlet to delete the all comments and refreshes the page 
+ */
+function deleteAllCommentsFromDB() {
+  const params = new URLSearchParams();
+  params.append('deleteAll', true);
+  fetch('/delete-comment', { method: 'POST', body: params })
+    .then(resp => getCommentsList());
+}
+
+
 /**
  * fetch the login status from the servlet. 
  * If the user is logged in, unhide the comment section.
