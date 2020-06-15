@@ -17,15 +17,14 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.appengine.api.datastore.FetchOptions;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.sql.Timestamp;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +38,12 @@ public class GetCommentsServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int maxComments = getMaxComments(request);
 
-    Query query = new Query(Comment.ENTITY_NAME).addSort(Comment.POST_TIME_FIELD, SortDirection.DESCENDING);
+    Query query =
+        new Query(Comment.ENTITY_NAME).addSort(Comment.POST_TIME_FIELD, SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    FetchOptions commentsQueryOptions = FetchOptions.Builder
-                                        .withLimit(maxComments);
+    FetchOptions commentsQueryOptions = FetchOptions.Builder.withLimit(maxComments);
 
     ArrayList<Comment> commentList = new ArrayList<>();
     for (Entity commentEntity : results.asIterable(commentsQueryOptions)) {
