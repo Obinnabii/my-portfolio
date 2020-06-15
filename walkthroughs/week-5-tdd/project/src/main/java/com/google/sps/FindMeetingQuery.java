@@ -14,10 +14,27 @@
 
 package com.google.sps;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+
+import org.graalvm.util.CollectionsUtil;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    Collection<TimeRange> conflicts = getConflictingEvents(events, request);
+
+  }
+
+  private Collection<TimeRange> getConflictingEvents(Collection<Event> events, MeetingRequest request){
+    ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
+    for (Event event : events ){
+      if(!Collections.disjoint(event.getAttendees(), request.getAttendees())){
+        conflicts.add(event.getWhen());
+      }
+    }
+    Collections.sort(conflicts, TimeRange.ORDER_BY_START);
+    return conflicts;
   }
 }
