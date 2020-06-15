@@ -24,13 +24,13 @@ import org.graalvm.util.CollectionsUtil;
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<TimeRange> conflicts = getConflictingEvents(events, request);
-
+    return conflicts;
   }
 
   private Collection<TimeRange> getConflictingEvents(Collection<Event> events, MeetingRequest request){
     ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
-    for (Event event : events ){
-      if(!Collections.disjoint(event.getAttendees(), request.getAttendees())){
+    for (Event event : events) {
+      if (!Collections.disjoint(event.getAttendees(), request.getAttendees())) {
         conflicts.add(event.getWhen());
       }
     }
