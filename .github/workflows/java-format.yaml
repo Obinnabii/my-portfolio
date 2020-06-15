@@ -3,7 +3,7 @@ name: JavaFormat
 on:
   push:
     branches:
-      - **
+      - '**'
 
 jobs:
 
