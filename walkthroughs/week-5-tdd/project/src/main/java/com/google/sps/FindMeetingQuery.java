@@ -39,18 +39,25 @@ public final class FindMeetingQuery {
   private ArrayList<TimeRange> getPossibleTimeRanges(
       Collection<TimeRange> conflicts, long duration) {
     int start = TimeRange.START_OF_DAY;
-
     ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
+    // These are the situations that could occur while looking for a good time
+    // s = start
+    // Case 1: s |---|
+    //      -> distance could be large enough (a) or not large enough (b)
+    // Case 2: |-s-|
+    //           
+    // Case 3: |---| s (in this situation, don't do anything)
+    //           
     for (TimeRange conflict : conflicts) {
       int end = conflict.start();
-      if (end - start >= duration) {
+      if (end - start >= duration) { // Case 1(a)
         possibleTimes.add(TimeRange.fromStartEnd(start, end, false));
+      } 
+      if (start < conflict.end()) { // !Case 3
+        start = conflict.end();
       }
-      int conflictEnd = conflict.end();
-      start = start > conflictEnd ? start : conflictEnd;
     }
-
-    if (start - TimeRange.END_OF_DAY >= duration) {
+    if (TimeRange.END_OF_DAY - start >= duration) {
       possibleTimes.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
     }
     return possibleTimes;
