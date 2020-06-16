@@ -17,7 +17,6 @@ package com.google.sps;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -25,7 +24,8 @@ public final class FindMeetingQuery {
     return getPossibleTimeRanges(conflicts, request.getDuration());
   }
 
-  private ArrayList<TimeRange> getConflictingEvents(Collection<Event> events, MeetingRequest request){
+  private ArrayList<TimeRange> getConflictingEvents(
+      Collection<Event> events, MeetingRequest request) {
     ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
     for (Event event : events) {
       if (!Collections.disjoint(event.getAttendees(), request.getAttendees())) {
@@ -36,13 +36,14 @@ public final class FindMeetingQuery {
     return conflicts;
   }
 
-  private ArrayList<TimeRange> getPossibleTimeRanges(Collection<TimeRange> conflicts, long duration) {
+  private ArrayList<TimeRange> getPossibleTimeRanges(
+      Collection<TimeRange> conflicts, long duration) {
     int start = TimeRange.START_OF_DAY;
 
     ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
     for (TimeRange conflict : conflicts) {
       int end = conflict.start();
-      if (end - start >= duration){
+      if (end - start >= duration) {
         possibleTimes.add(TimeRange.fromStartEnd(start, end, false));
       }
       int conflictEnd = conflict.end();
