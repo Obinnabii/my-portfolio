@@ -46,14 +46,14 @@ public final class FindMeetingQuery {
     //      -> distance could be (a) large enough to add as a possible time
     //                        or (b) not large enough
     // Case 2: |-s-|    -> |--s
-    //           
+    //
     // Case 3: |---| s  -> |---| s
-    //           
+    //
     for (TimeRange conflict : conflicts) {
       int end = conflict.start();
       if (end - start >= duration) { // Case 1(a)
         possibleTimes.add(TimeRange.fromStartEnd(start, end, false));
-      } 
+      }
       if (start < conflict.end()) { // !Case 3
         start = conflict.end();
       }
