@@ -42,11 +42,12 @@ public final class FindMeetingQuery {
     ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
     // These are the situations that could occur while looking for a good time
     // s = start
-    // Case 1: s |---|
-    //      -> distance could be large enough (a) or not large enough (b)
-    // Case 2: |-s-|
+    // Case 1: s |---|  -> |--s
+    //      -> distance could be (a) large enough to add as a possible time
+    //                        or (b) not large enough
+    // Case 2: |-s-|    -> |--s
     //           
-    // Case 3: |---| s (in this situation, don't do anything)
+    // Case 3: |---| s  -> |---| s
     //           
     for (TimeRange conflict : conflicts) {
       int end = conflict.start();
