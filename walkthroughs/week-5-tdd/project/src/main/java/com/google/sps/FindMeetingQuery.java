@@ -17,15 +17,15 @@ package com.google.sps;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<TimeRange> conflicts = getConflictingEvents(events, request);
-    return conflicts;
+    ArrayList<TimeRange> conflicts = getConflictingEvents(events, request);
+    return getPossibleTimeRanges(conflicts, request.getDuration());
   }
 
-  private Collection<TimeRange> getConflictingEvents(
-      Collection<Event> events, MeetingRequest request) {
+  private ArrayList<TimeRange> getConflictingEvents(Collection<Event> events, MeetingRequest request){
     ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
     for (Event event : events) {
       if (!Collections.disjoint(event.getAttendees(), request.getAttendees())) {
@@ -34,5 +34,24 @@ public final class FindMeetingQuery {
     }
     Collections.sort(conflicts, TimeRange.ORDER_BY_START);
     return conflicts;
+  }
+
+  private ArrayList<TimeRange> getPossibleTimeRanges(Collection<TimeRange> conflicts, long duration) {
+    int start = TimeRange.START_OF_DAY;
+
+    ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
+    for (TimeRange conflict : conflicts) {
+      int end = conflict.start();
+      if (end - start >= duration){
+        possibleTimes.add(TimeRange.fromStartEnd(start, end, false));
+      }
+      int conflictEnd = conflict.end();
+      start = start > conflictEnd ? start : conflictEnd;
+    }
+
+    if (start - TimeRange.END_OF_DAY >= duration) {
+      possibleTimes.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
+    }
+    return possibleTimes;
   }
 }
