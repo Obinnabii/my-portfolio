@@ -14,21 +14,50 @@
 
 package com.google.sps;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    ArrayList<TimeRange> conflicts = getConflictingEvents(events, request);
-    return getPossibleTimeRanges(conflicts, request.getDuration());
+    Collection<String> mandatoryAttendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
+    long duration = request.getDuration();
+
+    if (mandatoryAttendees.isEmpty()){
+      System.out.println(optionalAttendees);
+      ArrayList<TimeRange> optionalConflicts = getConflictingEvents(events, optionalAttendees);
+      return getPossibleTimeRanges(optionalConflicts, duration);
+    }
+    
+    ArrayList<String> allAttendees = new ArrayList<String>();
+    allAttendees.addAll(mandatoryAttendees);
+    allAttendees.addAll(optionalAttendees);
+    System.out.println(mandatoryAttendees);
+    System.out.println(allAttendees);
+    ArrayList<TimeRange> optionalConflicts = getConflictingEvents(events, mandatoryAttendees);
+    System.out.println(duration);
+    System.out.println(optionalConflicts);
+    System.out.println(getPossibleTimeRanges(optionalConflicts, duration));
+      return getPossibleTimeRanges(optionalConflicts, duration);
+
+
+    // ArrayList<TimeRange> allConflicts = getConflictingEvents(events, allAttendees);
+    // ArrayList<TimeRange> possibleTimerangesAllAttendees = getPossibleTimeRanges(allConflicts, duration);
+    // if (possibleTimerangesAllAttendees.isEmpty()){
+    //   ArrayList<TimeRange> mandatoryConflicts = getConflictingEvents(events, request.getAttendees());
+    //   return  getPossibleTimeRanges(mandatoryConflicts, duration);
+    // }
+    // return possibleTimerangesAllAttendees;
+
   }
 
   private ArrayList<TimeRange> getConflictingEvents(
-      Collection<Event> events, MeetingRequest request) {
+      Collection<Event> events, Collection<String> meetingAttendees) {
     ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
     for (Event event : events) {
-      if (!Collections.disjoint(event.getAttendees(), request.getAttendees())) {
+      if (!Collections.disjoint(event.getAttendees(), meetingAttendees)) {
         conflicts.add(event.getWhen());
       }
     }
