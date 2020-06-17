@@ -37,9 +37,10 @@ public final class FindMeetingQuery {
   }
 
   private ArrayList<TimeRange> getPossibleTimeRanges(
-      Collection<TimeRange> conflicts, long duration) {
+    Collection<TimeRange> conflicts, long duration) {
     int start = TimeRange.START_OF_DAY;
     ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
+    
     // These are the situations that could occur while looking for a good time
     // s = start
     // Case 1: s |---|  -> |--s
