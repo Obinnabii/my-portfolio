@@ -315,7 +315,7 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void fullyBookedOptionalAttendee() {
-      System.out.println("fullyBooked");
+    System.out.println("fullyBooked");
     // An optional attendee C who has an all-day event. C should be
     // disregarded.
     //
@@ -349,7 +349,7 @@ public final class FindMeetingQueryTest {
             TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0800AM, false),
             TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
-            System.out.println("endl");
+    System.out.println("endl");
     Assert.assertEquals(expected, actual);
   }
 
@@ -389,7 +389,7 @@ public final class FindMeetingQueryTest {
         Arrays.asList(
             TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0800AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
-            System.out.println("endl");
+    System.out.println("endl");
     Assert.assertEquals(expected, actual);
   }
 
@@ -423,7 +423,7 @@ public final class FindMeetingQueryTest {
             TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0800AM, false),
             TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
-            System.out.println("endl");
+    System.out.println("endl");
     Assert.assertEquals(expected, actual);
   }
 
@@ -482,13 +482,14 @@ public final class FindMeetingQueryTest {
                 TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, true),
                 Arrays.asList(PERSON_C)));
 
-    MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
+    MeetingRequest request =
+        new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
     request.addOptionalAttendee(PERSON_C);
 
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected =
         Arrays.asList(TimeRange.fromStartDuration(TIME_0830AM, DURATION_60_MINUTES));
-        System.out.println("endl");
+    System.out.println("endl");
     Assert.assertEquals(expected, actual);
   }
 }

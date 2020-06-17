@@ -14,7 +14,6 @@
 
 package com.google.sps;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,12 +24,12 @@ public final class FindMeetingQuery {
     Collection<String> optionalAttendees = request.getOptionalAttendees();
     long duration = request.getDuration();
 
-    if (mandatoryAttendees.isEmpty()){
+    if (mandatoryAttendees.isEmpty()) {
       System.out.println(optionalAttendees);
       ArrayList<TimeRange> optionalConflicts = getConflictingEvents(events, optionalAttendees);
       return getPossibleTimeRanges(optionalConflicts, duration);
     }
-    
+
     ArrayList<String> allAttendees = new ArrayList<String>();
     allAttendees.addAll(mandatoryAttendees);
     allAttendees.addAll(optionalAttendees);
@@ -40,13 +39,14 @@ public final class FindMeetingQuery {
     System.out.println(duration);
     System.out.println(optionalConflicts);
     System.out.println(getPossibleTimeRanges(optionalConflicts, duration));
-      return getPossibleTimeRanges(optionalConflicts, duration);
-
+    return getPossibleTimeRanges(optionalConflicts, duration);
 
     // ArrayList<TimeRange> allConflicts = getConflictingEvents(events, allAttendees);
-    // ArrayList<TimeRange> possibleTimerangesAllAttendees = getPossibleTimeRanges(allConflicts, duration);
+    // ArrayList<TimeRange> possibleTimerangesAllAttendees = getPossibleTimeRanges(allConflicts,
+    // duration);
     // if (possibleTimerangesAllAttendees.isEmpty()){
-    //   ArrayList<TimeRange> mandatoryConflicts = getConflictingEvents(events, request.getAttendees());
+    //   ArrayList<TimeRange> mandatoryConflicts = getConflictingEvents(events,
+    // request.getAttendees());
     //   return  getPossibleTimeRanges(mandatoryConflicts, duration);
     // }
     // return possibleTimerangesAllAttendees;
