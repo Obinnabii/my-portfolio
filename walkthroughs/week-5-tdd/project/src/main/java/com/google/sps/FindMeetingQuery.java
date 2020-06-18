@@ -25,7 +25,6 @@ public final class FindMeetingQuery {
     long duration = request.getDuration();
 
     if (mandatoryAttendees.isEmpty()) {
-      System.out.println(optionalAttendees);
       ArrayList<TimeRange> optionalConflicts = getConflictingEvents(events, optionalAttendees);
       return getPossibleTimeRanges(optionalConflicts, duration);
     }
@@ -33,23 +32,16 @@ public final class FindMeetingQuery {
     ArrayList<String> allAttendees = new ArrayList<String>();
     allAttendees.addAll(mandatoryAttendees);
     allAttendees.addAll(optionalAttendees);
-    System.out.println(mandatoryAttendees);
-    System.out.println(allAttendees);
-    ArrayList<TimeRange> optionalConflicts = getConflictingEvents(events, mandatoryAttendees);
-    System.out.println(duration);
-    System.out.println(optionalConflicts);
-    System.out.println(getPossibleTimeRanges(optionalConflicts, duration));
-    return getPossibleTimeRanges(optionalConflicts, duration);
 
-    // ArrayList<TimeRange> allConflicts = getConflictingEvents(events, allAttendees);
-    // ArrayList<TimeRange> possibleTimerangesAllAttendees = getPossibleTimeRanges(allConflicts,
-    // duration);
-    // if (possibleTimerangesAllAttendees.isEmpty()){
-    //   ArrayList<TimeRange> mandatoryConflicts = getConflictingEvents(events,
-    // request.getAttendees());
-    //   return  getPossibleTimeRanges(mandatoryConflicts, duration);
-    // }
-    // return possibleTimerangesAllAttendees;
+    ArrayList<TimeRange> allConflicts = getConflictingEvents(events, allAttendees);
+    ArrayList<TimeRange> possibleTimerangesAllAttendees = getPossibleTimeRanges(allConflicts,
+    duration);
+    if (possibleTimerangesAllAttendees.isEmpty()){
+      ArrayList<TimeRange> mandatoryConflicts = getConflictingEvents(events,
+    request.getAttendees());
+      return  getPossibleTimeRanges(mandatoryConflicts, duration);
+    }
+    return possibleTimerangesAllAttendees;
 
   }
 
@@ -58,6 +50,9 @@ public final class FindMeetingQuery {
     ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
     for (Event event : events) {
       if (!Collections.disjoint(event.getAttendees(), meetingAttendees)) {
+        System.out.println(event);
+        System.out.println(event.getWhen());
+        System.out.println(event.getAttendees());
         conflicts.add(event.getWhen());
       }
     }
