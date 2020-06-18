@@ -24,11 +24,6 @@ public final class FindMeetingQuery {
     Collection<String> optionalAttendees = request.getOptionalAttendees();
     long duration = request.getDuration();
 
-    if (mandatoryAttendees.isEmpty()) {
-      ArrayList<TimeRange> optionalConflicts = getConflictingEvents(events, optionalAttendees);
-      return getPossibleTimeRanges(optionalConflicts, duration);
-    }
-
     ArrayList<String> allAttendees = new ArrayList<String>();
     allAttendees.addAll(mandatoryAttendees);
     allAttendees.addAll(optionalAttendees);
@@ -36,7 +31,7 @@ public final class FindMeetingQuery {
     ArrayList<TimeRange> allConflicts = getConflictingEvents(events, allAttendees);
     ArrayList<TimeRange> possibleTimerangesAllAttendees =
         getPossibleTimeRanges(allConflicts, duration);
-    if (possibleTimerangesAllAttendees.isEmpty()) {
+    if (possibleTimerangesAllAttendees.isEmpty() && !mandatoryAttendees.isEmpty() ) {
       ArrayList<TimeRange> mandatoryConflicts =
           getConflictingEvents(events, request.getAttendees());
       return getPossibleTimeRanges(mandatoryConflicts, duration);
@@ -49,9 +44,6 @@ public final class FindMeetingQuery {
     ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
     for (Event event : events) {
       if (!Collections.disjoint(event.getAttendees(), meetingAttendees)) {
-        System.out.println(event);
-        System.out.println(event.getWhen());
-        System.out.println(event.getAttendees());
         conflicts.add(event.getWhen());
       }
     }
