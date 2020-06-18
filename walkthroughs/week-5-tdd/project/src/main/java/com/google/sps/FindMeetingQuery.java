@@ -34,15 +34,14 @@ public final class FindMeetingQuery {
     allAttendees.addAll(optionalAttendees);
 
     ArrayList<TimeRange> allConflicts = getConflictingEvents(events, allAttendees);
-    ArrayList<TimeRange> possibleTimerangesAllAttendees = getPossibleTimeRanges(allConflicts,
-    duration);
-    if (possibleTimerangesAllAttendees.isEmpty()){
-      ArrayList<TimeRange> mandatoryConflicts = getConflictingEvents(events,
-    request.getAttendees());
-      return  getPossibleTimeRanges(mandatoryConflicts, duration);
+    ArrayList<TimeRange> possibleTimerangesAllAttendees =
+        getPossibleTimeRanges(allConflicts, duration);
+    if (possibleTimerangesAllAttendees.isEmpty()) {
+      ArrayList<TimeRange> mandatoryConflicts =
+          getConflictingEvents(events, request.getAttendees());
+      return getPossibleTimeRanges(mandatoryConflicts, duration);
     }
     return possibleTimerangesAllAttendees;
-
   }
 
   private ArrayList<TimeRange> getConflictingEvents(
