@@ -14,10 +14,53 @@
 
 package com.google.sps;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    ArrayList<TimeRange> conflicts = getConflictingEvents(events, request);
+    return getPossibleTimeRanges(conflicts, request.getDuration());
+  }
+
+  private ArrayList<TimeRange> getConflictingEvents(
+      Collection<Event> events, MeetingRequest request) {
+    ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
+    for (Event event : events) {
+      if (!Collections.disjoint(event.getAttendees(), request.getAttendees())) {
+        conflicts.add(event.getWhen());
+      }
+    }
+    Collections.sort(conflicts, TimeRange.ORDER_BY_START);
+    return conflicts;
+  }
+
+  private ArrayList<TimeRange> getPossibleTimeRanges(
+      Collection<TimeRange> conflicts, long duration) {
+    int start = TimeRange.START_OF_DAY;
+    ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
+    // These are the situations that could occur while looking for a good time
+    // s = start
+    // Case 1: s |---|  -> |--s
+    //      -> distance could be (a) large enough to add as a possible time
+    //                        or (b) not large enough
+    // Case 2: |-s-|    -> |--s
+    //
+    // Case 3: |---| s  -> |---| s
+    //
+    for (TimeRange conflict : conflicts) {
+      int end = conflict.start();
+      if (end - start >= duration) { // Case 1(a)
+        possibleTimes.add(TimeRange.fromStartEnd(start, end, false));
+      }
+      if (start < conflict.end()) { // !Case 3
+        start = conflict.end();
+      }
+    }
+    if (TimeRange.END_OF_DAY - start >= duration) {
+      possibleTimes.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
+    }
+    return possibleTimes;
   }
 }
