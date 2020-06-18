@@ -353,7 +353,7 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void conflictingOptionalAttendee() {
-    // An optional attendee C who has an even that conflicts with an otherwise good time. C should
+    // An optional attendee C who has an event that conflicts with an otherwise good time. C should
     // not be disregarded because there will be
     // other available times.
     //
