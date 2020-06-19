@@ -360,7 +360,7 @@ public final class FindMeetingQueryTest {
     // Events  :       |--A--|     |--B--|
     // Optional:             |--C--|
     // Day     : |-----------------------------|
-    // Options : |--1--|     |--2--|     |--3--|
+    // Options : |--1--|                 |--3--|
 
     Collection<Event> events =
         Arrays.asList(
