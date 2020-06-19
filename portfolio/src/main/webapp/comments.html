@@ -11,6 +11,9 @@
 <script src="https://kit.fontawesome.com/2e7fd39b04.js" crossorigin="anonymous"></script>
 <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
 
+<!--Map-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR88Giah8cCEAvT_zDSIREWvgIIAeS8yY"></script>
+
 <!-- Bootstrap CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -18,7 +21,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="comments.css">
 
-<body onload="setUpCommentsPage()">
+<body>
   <div id="content" class="container-md">
     <header>
       <!-- Navigation bar at the top -->
@@ -47,6 +50,12 @@
     <div class="row">
       <a id="auth-button">loading...</a>
     </div>
+    <div class="row">
+      <h2 id="map-header" class="emphasis"> Cornell University </h3>
+    </div>
+    <div class="row">
+      <div id="map"></div>
+    </div>
   </div>
 
   <!-- SCRIPTS  -->
@@ -60,5 +69,7 @@
 
   <!-- Custom JS -->
   <script src="nav.js"></script>
+  <script src="map.js"></script>
   <script src="comments.js"></script>
+
 </body>
