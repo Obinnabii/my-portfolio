@@ -28,7 +28,6 @@ function createMap() {
     document.getElementById('map'), { center: cornellUniversity, zoom: 15 });
 
   addLandmark(map, myFavoriteTrail);
-
 }
 
 /** Adds a marker that shows an info window when clicked. */
