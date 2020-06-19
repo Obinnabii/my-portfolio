@@ -12,9 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const cornellUniversity = new google.maps.LatLng(42.446872, -76.483842);
+
+const myFavoriteTrail = {
+  position: new google.maps.LatLng(42.442732, -76.485788),
+  title: "My Favorite Trail",
+  description: "I have jogged the Cascacadilla Gorge Trail on multiple occasions. " +
+    "It is the perfect place to calm your nerves!"
+}
+
+
 /** Creates a map and adds it to the page. */
 function createMap() {
   const map = new google.maps.Map(
-      document.getElementById('map'),
-      {center: {lat: 42.446872, lng: -76.483842}, zoom: 16});
+    document.getElementById('map'), { center: cornellUniversity, zoom: 13 })
+
+  addLandmark(map, myFavoriteTrail);
+
+}
+
+/** Adds a marker that shows an info window when clicked. */
+function addLandmark(map, location) {
+  const marker = new google.maps.Marker({ position: location.position, map: map, title: location.title });
+
+  const infoWindow = new google.maps.InfoWindow({ content: location.description });
+  marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+  });
 }
