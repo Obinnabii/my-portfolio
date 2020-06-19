@@ -34,7 +34,7 @@ const LOGIN_BUTTON_CLASS = 'btn login'
 
 // START_UP_FUNCTION
 /**
- * Set up the comments.html page and add a  map
+ * Set up the comments.html page with the comments section and add a map to the bottom of the Comments page.
  */
 function setUpCommentsPage() {
   getCommentsList();
@@ -227,4 +227,6 @@ function showCommentSection(userIsLoggedin) {
   }
 }
 
+// FUNCTION_CALLS
 window.onload = setUpCommentsPage;
+

@@ -114,8 +114,9 @@ small {
 
 #map {
   border: thin solid black;
+  color: black;
   height: 500px;
   margin: 10%;
   margin-top: 5%;
-  width: 500px;
+  width: 650px;
 }
