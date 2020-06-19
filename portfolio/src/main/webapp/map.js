@@ -12,8 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** The coordinates for Cornell University */
 const cornellUniversity = new google.maps.LatLng(42.446872, -76.483842);
 
+/** The location object for my favorite trail */
 const myFavoriteTrail = {
   position: new google.maps.LatLng(42.442732, -76.485788),
   title: "My Favorite Trail",
@@ -39,6 +41,3 @@ function addLandmark(map, location) {
     infoWindow.open(map, marker);
   });
 }
-
-// FUNCTION_CALLS
-createMap();
