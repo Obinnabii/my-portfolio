@@ -34,11 +34,12 @@ const LOGIN_BUTTON_CLASS = 'btn login'
 
 // START_UP_FUNCTION
 /**
- * Set up the comments.html page
+ * Set up the comments.html page and add a  map
  */
 function setUpCommentsPage() {
   getCommentsList();
   getUserLoginStatus();
+  createMap();
 }
 
 // SERVER_FUNCTIONS
