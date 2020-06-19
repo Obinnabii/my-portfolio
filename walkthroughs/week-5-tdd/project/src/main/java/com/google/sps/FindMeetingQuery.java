@@ -33,7 +33,7 @@ public final class FindMeetingQuery {
         getPossibleTimeRanges(allConflicts, duration);
     if (possibleTimerangesAllAttendees.isEmpty() && !mandatoryAttendees.isEmpty()) {
       ArrayList<TimeRange> mandatoryConflicts =
-          getConflictingEvents(events, request.getAttendees());
+          getConflictingEvents(events, mandatoryAttendees);
       return getPossibleTimeRanges(mandatoryConflicts, duration);
     }
     return possibleTimerangesAllAttendees;
