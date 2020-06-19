@@ -20,15 +20,29 @@ import java.util.Collections;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    ArrayList<TimeRange> conflicts = getConflictingEvents(events, request);
-    return getPossibleTimeRanges(conflicts, request.getDuration());
+    Collection<String> mandatoryAttendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
+    long duration = request.getDuration();
+
+    ArrayList<String> allAttendees = new ArrayList<String>();
+    allAttendees.addAll(mandatoryAttendees);
+    allAttendees.addAll(optionalAttendees);
+
+    ArrayList<TimeRange> allConflicts = getConflictingEvents(events, allAttendees);
+    ArrayList<TimeRange> possibleTimerangesAllAttendees =
+        getPossibleTimeRanges(allConflicts, duration);
+    if (possibleTimerangesAllAttendees.isEmpty() && !mandatoryAttendees.isEmpty()) {
+      ArrayList<TimeRange> mandatoryConflicts = getConflictingEvents(events, mandatoryAttendees);
+      return getPossibleTimeRanges(mandatoryConflicts, duration);
+    }
+    return possibleTimerangesAllAttendees;
   }
 
   private ArrayList<TimeRange> getConflictingEvents(
-      Collection<Event> events, MeetingRequest request) {
+      Collection<Event> events, Collection<String> meetingAttendees) {
     ArrayList<TimeRange> conflicts = new ArrayList<TimeRange>();
     for (Event event : events) {
-      if (!Collections.disjoint(event.getAttendees(), request.getAttendees())) {
+      if (!Collections.disjoint(event.getAttendees(), meetingAttendees)) {
         conflicts.add(event.getWhen());
       }
     }
@@ -40,6 +54,7 @@ public final class FindMeetingQuery {
       Collection<TimeRange> conflicts, long duration) {
     int start = TimeRange.START_OF_DAY;
     ArrayList<TimeRange> possibleTimes = new ArrayList<TimeRange>();
+
     // These are the situations that could occur while looking for a good time
     // s = start
     // Case 1: s |---|  -> |--s
