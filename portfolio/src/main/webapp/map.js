@@ -12,10 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** The coordinates for Cornell University */
+/**
+ * @typedef MarkerInfo
+ * @type {object}
+ * @property {LatLng} position - geographical location of marker on google maps.
+ * @property {string} title - name of marker.
+ * @property {string} description - info to be displayed when marker is clicked.
+ */
+
+/** The coordinates for Cornell University 
+ * @type {LatLng}
+ */
 const cornellUniversity = new google.maps.LatLng(42.446872, -76.483842);
 
-/** The location object for my favorite trail */
+/** The location object for my favorite trail 
+ * @type {MarkerInfo}
+ */
 const myFavoriteTrail = {
   position: new google.maps.LatLng(42.442732, -76.485788),
   title: "My Favorite Trail",
@@ -32,7 +44,10 @@ function createMap() {
   addLandmark(map, myFavoriteTrail);
 }
 
-/** Adds a marker that shows an info window when clicked. */
+/** Adds a marker that shows an info window when clicked.
+ * @param {Map} map
+ * @param {MarkerInfo} location - information about the marker that will point to the proposed landmark 
+ */
 function addLandmark(map, location) {
   const marker = new google.maps.Marker({ position: location.position, map: map, title: location.title });
 
