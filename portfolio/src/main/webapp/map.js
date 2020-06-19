@@ -18,7 +18,7 @@ const myFavoriteTrail = {
   position: new google.maps.LatLng(42.442732, -76.485788),
   title: "My Favorite Trail",
   description: "I have jogged the Cascacadilla Gorge Trail on multiple occasions. " +
-    "It is the perfect place to calm your nerves!"
+    "It is the perfect place to calm your nerves!",
 }
 
 
