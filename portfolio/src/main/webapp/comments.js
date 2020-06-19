@@ -225,3 +225,6 @@ function showCommentSection(userIsLoggedin) {
     commentSection.hidden;
   }
 }
+
+// FUNCTION_CALLS
+setUpCommentsPage();

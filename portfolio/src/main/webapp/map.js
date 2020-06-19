@@ -25,7 +25,7 @@ const myFavoriteTrail = {
 /** Creates a map and adds it to the page. */
 function createMap() {
   const map = new google.maps.Map(
-    document.getElementById('map'), { center: cornellUniversity, zoom: 13 })
+    document.getElementById('map'), { center: cornellUniversity, zoom: 15 })
 
   addLandmark(map, myFavoriteTrail);
 
@@ -40,3 +40,6 @@ function addLandmark(map, location) {
     infoWindow.open(map, marker);
   });
 }
+
+// FUNCTION_CALLS
+createMap();
