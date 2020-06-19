@@ -107,3 +107,9 @@ small {
 .email-comment-separator {
   color: rgb(0, 140, 160);
 }
+
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 500px;
+}
