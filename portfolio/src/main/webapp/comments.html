@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="comments.css">
 
-<body onload="setUpCommentsPage()">
+<body onload="setUpCommentsPage(); createMap();">
   <div id="content" class="container-md">
     <header>
       <!-- Navigation bar at the top -->
@@ -50,7 +50,10 @@
     <div class="row">
       <a id="auth-button">loading...</a>
     </div>
-    <div class="row" onload="createMap()">
+    <div class="row">
+      <h2 id="map-header" class="emphasis"> Cornell University </h3>
+    </div>
+    <div class="row">
       <div id="map"></div>
     </div>
   </div>
